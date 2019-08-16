@@ -34,7 +34,7 @@ gem 'hirb'
 gem 'database_cleaner', '~> 1.7'
 gem 'rspec-rails', '~> 3.8', '>= 3.8.2'
 gem 'omniauth-facebook'
-
+gem 'semantic-ui-sass'
 # Use ActiveStorage variant
 # gem 'mini_magick', '~> 4.8'
 

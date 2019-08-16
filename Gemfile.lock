@@ -224,6 +224,8 @@ GEM
     selenium-webdriver (3.142.3)
       childprocess (>= 0.5, < 2.0)
       rubyzip (~> 1.2, >= 1.2.2)
+    semantic-ui-sass (2.4.2.0)
+      sass (>= 3.2)
     spring (2.1.0)
     spring-watcher-listen (2.0.1)
       listen (>= 2.7, < 4.0)
@@ -282,6 +284,7 @@ DEPENDENCIES
   rspec-rails (~> 3.8, >= 3.8.2)
   sass-rails (~> 5.0)
   selenium-webdriver
+  semantic-ui-sass
   spring
   spring-watcher-listen (~> 2.0.0)
   turbolinks (~> 5)
