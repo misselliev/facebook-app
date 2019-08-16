@@ -1,14 +1,16 @@
-<h2>Log in</h2>
-
-<%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
+<h4 class="ui center aligned medium icon header">
+  <i class="circular pink users icon"></i>
+  Login
+</h4>
+<br>
+<div class="ui container centered grid">
+<%= form_for(resource, as: resource_name, url: session_path(resource_name),:html => {:class => "ui form"}) do |f| %>
   <div class="field">
-    <%= f.label :email %><br />
-    <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
+    <%= f.email_field :email, placeholder: "Email" %>
   </div>
 
   <div class="field">
-    <%= f.label :password %><br />
-    <%= f.password_field :password, autocomplete: "current-password" %>
+    <%= f.password_field :password, placeholder: "Password" %>
   </div>
 
   <% if devise_mapping.rememberable? %>
@@ -19,8 +21,11 @@
   <% end %>
 
   <div class="actions">
-    <%= f.submit "Log in" %>
+    <%= f.submit "Log in", class:'ui pink basic button' %>
   </div>
-<% end %>
+  <br>
+  <%= render "devise/shared/links" %>
 
-<%= render "devise/shared/links" %>
+<% end %>
+</div>
+
