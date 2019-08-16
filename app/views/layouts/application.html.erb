@@ -16,6 +16,11 @@
     <% if alert %>
       <p class="alert alert-danger"><%= alert %></p>
     <% end %>
+    <div class="ui small inverted menu attached">
+      <div class="ui container">
+        <%= render 'shared/navigation'%>
+      </div>
+    </div>
     <%= yield %>
   </body>
 </html>
