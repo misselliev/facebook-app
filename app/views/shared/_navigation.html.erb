@@ -1,19 +1,16 @@
-<a>    
-  <%= link_to 'Home',root_path, class:'item' %>
-</a>
+<div>    
+    <img class="logo"/>
+</div>
 <div class="right menu">
-<% if user_signed_in? %>
-  <a>
-    <%= link_to current_user.email,edit_user_registration_path, class:'item' %>
-  </a>
-<% end %>
-  <a>
-    <%= link_to 'Login',new_user_session_path, class:'item' %>
-  </a>
-  <a>
-    <%= link_to 'Sign up',new_user_registration_path, class:'item' %>
-  </a>
-  <a>
-    <%= link_to 'Sign out',destroy_user_session_path, method: :delete, class:'item' %>
-  </a>
+<div class="ui inverted inline form">
+    <div class="three fields" style="margin:0.5em 0.5em 0.5em">
+      <div class="field">
+        <input placeholder="First Name" type="text">
+      </div>
+      <div class="field">
+        <input placeholder="Last Name" type="text">
+      </div>
+      <div class="ui submit button">Login</div>
+    </div>
+  </div>
 </div>
