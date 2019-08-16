@@ -1,5 +1,5 @@
 
-emails = ['eli@woof.com', 'santiago@woof.com', 'dulce@woof.com']
+emails = %w(eli@woof.com santiago@woof.com dulce@woof.com)
 
 3.times do |i|
   user = User.create(name: Faker::Name.unique.first_name,

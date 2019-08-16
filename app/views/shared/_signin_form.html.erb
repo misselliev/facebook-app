@@ -1,0 +1,26 @@
+<div class="right menu">
+  <div class="ui inverted inline form relaxed">
+    <div class="three fields">
+      <div class="ui container centered grid row">
+        <%= form_for(resource, as: resource_name, url: session_path(resource_name), :html => {:class => "ui form row"}) do |f| %>
+          <div class="field">
+            Email
+            <%= f.email_field :email %>
+          </div>
+
+          <div class="field">
+            Password
+            <%= f.password_field :password %>
+          </div>
+
+          <div class="actions">
+            <%= f.submit "Log in", class: 'ui basic button' %>
+          </div>
+          <br>
+          <%= render "devise/shared/links" %>
+
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>
