@@ -3,7 +3,7 @@
 require 'rails_helper'
 
 RSpec.describe Post, type: :model do
-  let (:author) { User.new(:name => "Dulce", :lastname => 'Woof', :email => "dulce@woof.com", :password => "123456", :password_confirmation => "123456") }
+  let (:author) { User.new(:id=>1,:name => "Dulce", :lastname => 'Woof', :email => "dulce@woof.com", :password => "123456", :password_confirmation => "123456") }
   subject { Post.new }
   
   describe 'basic validations for post model' do
@@ -19,6 +19,13 @@ RSpec.describe Post, type: :model do
     it 'is not valid if it has proper length data but no author' do
       subject.content = 'a' * 499
       expect(subject).not_to be_valid
+    end
+
+    it 'is valid if it has proper length data AND author' do
+      subject { Post.new }
+      subject.content = 'a' * 499
+      subject.author = author
+      expect(subject).to be_valid
     end
   end
 
