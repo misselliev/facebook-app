@@ -46,18 +46,26 @@ RSpec.describe User, type: :model do
     end
   end
 
-  # describe 'validating correct associations' do
-  #    it 'has correct associations with posts' do
-  #     should have_many(:posts)
-  #    end
+  describe 'validating correct associations' do
+    it "has many posts" do
+    assc = described_class.reflect_on_association(:posts)
+    expect(assc.macro).to eq :has_many
+    end
 
-  #   it 'has correct associations with comments' do
-  #     should have_many(:comments)
-  #   end
+    it "has many comments" do
+    assc = described_class.reflect_on_association(:comments)
+    expect(assc.macro).to eq :has_many
+    end
 
-  #   it 'has correct associations with likes' do
-  #     should have_many(:likes)
-  #   end
-  # end
+    it "has many likes" do
+    assc = described_class.reflect_on_association(:likes)
+    expect(assc.macro).to eq :has_many
+    end
+
+    it "has many friendships" do
+    assc = described_class.reflect_on_association(:friendships)
+    expect(assc.macro).to eq :has_many
+    end
+  end
 
 end
