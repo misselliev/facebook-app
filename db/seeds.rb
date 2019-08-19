@@ -5,8 +5,8 @@ emails = %w(eli@woof.com santiago@woof.com dulce@woof.com)
   user = User.create(name: Faker::Name.unique.first_name,
                      lastname: Faker::Name.last_name,
                      email: emails[i],
-                     password: 'croquetas',
-                     password_confirmation: 'croquetas')
+                     password: '123456',
+                     password_confirmation: '123456')
 
   5.times do
     user.posts.build(
