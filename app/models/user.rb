@@ -7,4 +7,9 @@ class User < ApplicationRecord
   has_many :comments, dependent: :destroy
   has_many :likes
   has_many :friendships, dependent: :destroy
+
+  validates :name, presence: :true, length: {minimum: 3, maximum: 50}
+  validates :lastname, presence: :true, length: {maximum: 50}
+  validates :email, presence: :true, length: {maximum: 50}
+
 end
