@@ -30,13 +30,13 @@ RSpec.describe Post, type: :model do
     end
 
     it "has many comments" do
-    assc = described_class.reflect_on_association(:comments)
-    expect(assc.macro).to eq :has_many
+      assc = described_class.reflect_on_association(:comments)
+      expect(assc.macro).to eq :has_many
     end
 
     it "has many likes" do
-    assc = described_class.reflect_on_association(:likes)
-    expect(assc.macro).to eq :has_many
+      assc = described_class.reflect_on_association(:likes)
+      expect(assc.macro).to eq :has_many
     end
   end
 
