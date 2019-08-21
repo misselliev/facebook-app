@@ -17,6 +17,28 @@ class PostsController < ApplicationController
     @posts = Post.all
   end
 
+  def show
+    @post = Post.find(params[:id])
+  end
+
+  def edit
+    @post = Post.find(params[:id])
+  end
+
+  def update
+    @post = Post.find(params[:id])
+    byebug
+    if @post.update_attributes(post_params)
+      flash[:success] = 'Post updated'
+      byebug
+      redirect_to post_path(params[:id])
+    else
+      render 'edit'
+    end
+
+  end
+
+
   private
 
   def post_params

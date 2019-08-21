@@ -1,5 +1,5 @@
 <h2 class="ui center aligned icon header">
-  <i class="circular purple pencil alternate icon"></i>
+  <i class="circular purple folder open outline icon"></i>
   Posts index
 </h2>
 
@@ -7,8 +7,13 @@
 <% @posts.each do |post|%>
   <div class="card">
     <div class="content">
-      <%= post.content %>
-      <div class="meta">Author: <%= post.author.name %></div>
+      <%= post.content%>
+      <br>
+      <div class="meta">Author: <%= post.author.name%> <%=post.author.lastname%></div>
+    </div>
+    <div class="ui bottom attached button">
+      <i class="envelope outline icon"></i>
+      <%= link_to "Open post", post_path(post) %>
     </div>
   </div>
 <%end%>
