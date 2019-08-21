@@ -1,0 +1,16 @@
+<h2 class="ui center aligned icon header">
+  <i class="circular purple pencil alternate icon"></i>
+  Posts index
+</h2>
+
+<div class="ui cards">
+<% @posts.each do |post|%>
+  <div class="card">
+    <div class="content">
+      <%= post.content %>
+      <div class="meta">Author: <%= post.author.name %></div>
+    </div>
+  </div>
+<%end%>
+</div>
+

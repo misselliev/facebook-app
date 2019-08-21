@@ -8,6 +8,6 @@ Rails.application.routes.draw do
   get 'user_index', to: 'users#index'
   
   resources :posts, only: %i[new create index]
-  get 'post_index', to: 'post#index'
+  get 'posts_index', to: 'posts#index'
 
 end
