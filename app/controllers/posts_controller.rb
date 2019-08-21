@@ -4,7 +4,13 @@ class PostsController < ApplicationController
   end
 
   def create
-    @post = Post.new(post_params)
+    @post = current_user.posts.build(post_params)
+    byebug
+    if @post.save
+      redirect_to posts_index_path
+    else
+      render 'new'
+    end
   end
 
   def index
