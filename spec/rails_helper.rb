@@ -76,4 +76,10 @@ RSpec.configure do |config|
       with.library :rails
     end
   end
+  # Use Devise test helpers in controller specs
+  config.include Devise::Test::ControllerHelpers, type: :controller
+  # Use Devise test helpers in view specs
+  config.include Devise::Test::ControllerHelpers, type: :view
+  # Use Devise test helpers in feature specs
+  config.include Devise::Test::IntegrationHelpers, type: :feature
 end
