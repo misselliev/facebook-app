@@ -10,17 +10,28 @@
   </head>
 
   <body>
-    <% if notice %>
-      <p class="alert alert-success"><%= notice %></p>
-    <% end %>
-    <% if alert %>
-      <p class="alert alert-danger"><%= alert %></p>
-    <% end %>
     <div class="ui purple inverted small menu attached">
       <div class="ui container">
         <%= render 'shared/navigation'%>
       </div>
     </div>
-    <%= yield %>
+    <div class="ui container">
+      <% if notice %>
+        <div class="ui positive message">
+          <i class="close icon"></i>
+          <%= notice %>
+        </div>
+      <% end %>
+      <% if alert %>
+        <div class="ui negative message">
+          <i class="close icon"></i>
+          <%= alert %>
+        </div>
+      <% end %>
+    </div>
+    <br>
+    <div class="ui container">
+      <%= yield %>
+    </div>
   </body>
 </html>

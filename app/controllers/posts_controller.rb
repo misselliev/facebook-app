@@ -27,10 +27,8 @@ class PostsController < ApplicationController
 
   def update
     @post = Post.find(params[:id])
-    byebug
     if @post.update_attributes(post_params)
       flash[:success] = 'Post updated'
-      byebug
       redirect_to post_path(params[:id])
     else
       render 'edit'
