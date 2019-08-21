@@ -3,46 +3,49 @@ require 'rails_helper'
 RSpec.describe User, type: :model do
   let(:user) { FactoryBot.create(:user) }
 
+
   describe 'basic validations for user model' do
+    context "validates presences" do
+      it { should validate_presence_of(:name) }
+      it { should validate_presence_of(:lastname) }
+      it { should validate_presence_of(:password) }
+      it { should validate_presence_of(:email) }
+    end
+
     it 'has a valid name' do
-      expect(user).to be_valid 
+      should allow_value("Ana").for(:name)
     end
 
     it 'has an invalid name' do
-      user.name = "aa"
-      expect(user).not_to be_valid 
+      should_not allow_value("fe").for(:name)
     end
-    
-      it 'has a valid lastname' do
-      expect(user).to be_valid 
+
+    it 'has a valid lastname' do
+      should allow_value("Día").for(:lastname)
     end
 
     it 'has an invalid lastname' do
-      user.lastname = "aa"
-      expect(user).not_to be_valid 
+      should_not allow_value("na").for(:lastname)
     end
 
     it 'has a valid email' do
-      expect(user).to be_valid 
+      should allow_value("dulce@woof.com").for(:email)
     end
 
     it 'has an invalid email' do
-      user.email = "aa@netco"
-      expect(user).not_to be_valid 
+      should_not allow_value("invalid").for(:email)
     end
 
     it 'has a valid password' do
-      expect(user).to be_valid 
+      should allow_value('123456').for(:password)
     end
 
     it 'has an invalid password, min length' do
-      user.password = "aa"
-      expect(user).not_to be_valid 
+      should_not allow_value('123').for(:password)
     end
 
     it 'has an invalid password, max length' do
-      user.password = "a" * 16
-      expect(user).not_to be_valid 
+      should_not allow_value('0123456789abcdefg').for(:password)
     end
   end
 
@@ -67,5 +70,4 @@ RSpec.describe User, type: :model do
     expect(assc.macro).to eq :has_many
     end
   end
-
 end
