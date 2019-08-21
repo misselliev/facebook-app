@@ -1,0 +1,16 @@
+<h2 class="ui center aligned icon header">
+  <i class="circular purple users icon"></i>
+  Users index
+</h2>
+
+<div class="ui cards">
+<% @users.each do |user|%>
+  <div class="card">
+    <div class="content">
+      <div class="header"><%=user.name%> <%=user.lastname%></div>
+      <div class="meta"><%=user.email%></div>
+    </div>
+  </div>
+<%end%>
+</div>
+
