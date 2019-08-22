@@ -14,3 +14,20 @@ emails = %w(eli@woof.com santiago@woof.com dulce@woof.com)
     ).save
   end
 end
+
+30.times do |i|
+  user = User.all.sample
+  post = Post.all.sample
+  comment = post.comments.build(
+      content: Faker::Movie.quote,
+      commenter: user
+  ).save
+end
+
+30.times do |i|
+  user = User.all.sample
+  post = Post.all.sample
+  like = user.likes.build(
+      post: post
+  ).save
+end
