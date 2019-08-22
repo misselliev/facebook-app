@@ -35,6 +35,8 @@ gem 'database_cleaner', '~> 1.7'
 gem 'rspec-rails', '~> 3.8', '>= 3.8.2'
 gem 'omniauth-facebook'
 gem 'semantic-ui-sass'
+gem 'jquery-rails', '~> 4.3', '>= 4.3.3'
+gem 'rails-ujs', '~> 0.1.0'
 # Use ActiveStorage variant
 # gem 'mini_magick', '~> 4.8'
 
