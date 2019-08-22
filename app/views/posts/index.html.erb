@@ -1,5 +1,5 @@
 <h2 class="ui center aligned icon header">
-  <i class="circular purple folder open outline icon"></i>
+  <i class="circular teal folder open outline icon"></i>
   Posts index
 </h2>
 
@@ -9,10 +9,11 @@
       <div class="content">
         <%= post.content %>
         <br>
+        <br>
         <div class="meta">Author: <%= post.author.name %> <%= post.author.lastname %></div>
       </div>
       <%= link_to post_path(post) do %>
-        <div class="ui purple basic bottom attached button">
+        <div class="ui bottom attached button">
           <i class="envelope outline icon"></i>
           Open
         </div>

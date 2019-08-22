@@ -1,7 +1,9 @@
 <div class="right menu">
   <div class="ui inverted inline form relaxed">
-    <div class="ui button" style="margin:0.5em 0.9em -0.9em">
-      <%= link_to 'Logout', destroy_user_session_path, method: :delete %>
-    </div>
+    <%= link_to destroy_user_session_path, method: :delete do %>
+      <div class="ui inverted teal basic button" style="margin:0.5em 0.9em -0.9em">
+        Sign out
+      </div>
+    <% end %>
   </div>
 </div>

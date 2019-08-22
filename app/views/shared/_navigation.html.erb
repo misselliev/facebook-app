@@ -1,5 +1,7 @@
 <a class="item" style="padding: 0px">
-  <div class="logo"></div>
+  <%= link_to posts_path do %>
+    <div class="logo"></div>
+  <% end %>
 </a>
 <% if current_user.nil?%>
   <%= render 'shared/signin_form' %>
