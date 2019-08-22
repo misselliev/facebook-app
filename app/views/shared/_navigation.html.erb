@@ -1,0 +1,8 @@
+<a class="item" style="padding: 0px">
+  <div class="logo"></div>
+</a>
+<% if current_user.nil?%>
+  <%= render 'shared/signin_form' %>
+<%else%>
+  <%= render 'shared/signout_nav'%>
+<%end%>

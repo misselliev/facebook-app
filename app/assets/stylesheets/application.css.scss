@@ -13,3 +13,12 @@
  *= require_tree .
  *= require_self
  */
+
+@import "semantic-ui";
+
+.logo {
+  background-image: url(asset_path("fakebook_rails.png"));
+  width: 170px;
+  height: 35px;
+  margin: 0.9em 0.5em 0.5em;
+}

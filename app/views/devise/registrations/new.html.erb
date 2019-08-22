@@ -1,0 +1,39 @@
+<h4 class="ui center aligned medium icon header">
+  <i class="circular pink users icon"></i>
+  Sign up
+</h4>
+<br>
+<div class="ui container centered grid">
+<%= form_for(resource, as: resource_name, url: registration_path(resource_name),:html => {:class => "ui form"}) do |f| %>
+  <%= render "devise/shared/error_messages", resource: resource %>
+<div class="ten wide column">
+  <div class="ui equal width form">
+    <div class="fields">
+        <div class="field">
+          <%= f.text_field :name, placeholder: "Name" %>
+        </div>
+        <div class="field">
+          <%= f.text_field :lastname, placeholder: "Lastname" %>
+        </div>
+    </div>
+  </div>
+
+    <div class="field">
+      <%= f.email_field :email, placeholder: "Email" %>
+    </div>
+
+    <div class="field">
+      <%= f.password_field :password, placeholder: "Password" %>
+    </div>
+
+    <div class="field">
+      <%= f.password_field :password_confirmation, placeholder: "Confirm Password" %>
+    </div>
+
+    <div class="actions">
+      <%= f.submit "Sign up", class:'ui purple basic button' %>
+    </div>
+    <br>
+  <% end %>
+  <%= render "devise/shared/links" %>
+</div>

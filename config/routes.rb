@@ -1,4 +1,14 @@
 Rails.application.routes.draw do
-  devise_for :users
-  # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
+  root 'pages#home'
+
+  devise_for :users, :controllers => { registrations: 'registrations' }
+  
+  resources :users, only: %i[new create index]
+  get 'users_index', to: 'users#index'
+  
+  resources :posts, only: %i[new create index show edit update]
+  get 'posts_index', to: 'posts#index'
+  match '/posts/create', to: 'posts#create', via: :post, as: :create_post
+
+
 end

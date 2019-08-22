@@ -1,0 +1,24 @@
+<div class="right menu">
+  <div class="ui inverted inline form relaxed">
+    <div class="three fields" style="margin:0.5em 0.9em -0.9em">
+      <%= form_for(resource, as: resource_name, url: session_path(resource_name), :html => {:class => "ui form row"}) do |f| %>
+      <div class="ui equal width form">
+        <div class="fields">
+          <div class="field">
+            <%= f.email_field :email, placeholder:'Email' %>
+          </div>
+
+          <div class="field">
+            <%= f.password_field :password, placeholder:'Password' %>
+          </div>
+
+          <div class="actions">
+            <%= f.submit "Log in", class: 'ui button' %>
+          </div>
+          <br>
+        </div>
+      </div>
+      <% end %>
+    </div>
+  </div>
+</div>

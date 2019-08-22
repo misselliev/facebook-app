@@ -1,0 +1,11 @@
+<%= form_for(@post, :html => {:class => "ui form ten wide column"}) do |f| %>
+  <%= render "devise/shared/error_messages", resource: @post %>
+  <div class="field">
+    <%= f.text_area :content, placeholder: "Write your post here..." %>
+  </div>
+  <br>
+  <div class="ui centered grid actions">
+    <%= f.submit "Post", class: 'medium ui purple basic button' %>
+  </div>
+  <br>
+<% end %>

@@ -1,0 +1,31 @@
+<h4 class="ui center aligned medium icon header">
+  <i class="circular pink users icon"></i>
+  Login
+</h4>
+<br>
+<div class="ui container centered grid">
+  <%= form_for(resource, as: resource_name, url: session_path(resource_name), :html => {:class => "ui form"}) do |f| %>
+    <div class="field">
+      <%= f.email_field :email, placeholder: "Email" %>
+    </div>
+
+    <div class="field">
+      <%= f.password_field :password, placeholder: "Password" %>
+    </div>
+
+    <% if devise_mapping.rememberable? %>
+      <div class="field">
+        <%= f.check_box :remember_me %>
+        <%= f.label :remember_me %>
+      </div>
+    <% end %>
+
+    <div class="actions">
+      <%= f.submit "Log in", class: 'ui purple basic button' %>
+    </div>
+    <br>
+    <%= render "devise/shared/links" %>
+
+  <% end %>
+</div>
+

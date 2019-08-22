@@ -1,0 +1,22 @@
+
+<h2 class="ui center aligned icon header">
+  <i class="circular purple envelope open outline icon"></i>
+  Post
+</h2>
+
+<div class="ui centered grid">
+  <br>
+  <div class="ui card">
+    <div class="content">
+      <%= @post.content %>
+      <div class="meta">Author: <%= @post.author.name %></div>
+    </div>
+  </div>
+  <br>
+</div>
+
+<div class="ui centered grid">
+  <div><%= link_to 'Edit post', edit_post_path(@post)%></div>
+  <div><%= link_to 'Post index', posts_index_path%></div>
+  <div><%= link_to 'Users index', users_index_path%></div>
+</div>
