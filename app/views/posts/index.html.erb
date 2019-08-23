@@ -7,9 +7,9 @@
   <div class="row">
     <div class="three wide column">
       <div class="ui left internal dividing rail" style="
-    border-right: white;">
+      border-right: white;">
         <div class="ui segment">
-          <%= render 'shared/links'%>
+          <%= render 'shared/links' %>
         </div>
       </div>
     </div>
@@ -20,8 +20,8 @@
           <% @posts.each do |post| %>
             <div class="ui raised segment">
               <div class="content">
-                <div  class="ui avatar image"><%= image_tag('profile.jpg') %></div> <%= post.author.name %>  <%= post.author.lastname %>
-                <span class="right aligned meta"><%= time_ago_in_words(post.created_at, include_seconds: true).gsub('about','') %></span>
+                <div class="ui avatar image"><%= image_tag('profile.jpg') %></div> <%= post.author.name %>  <%= post.author.lastname %>
+                <span class="right aligned meta"><%= time_ago_in_words(post.created_at, include_seconds: true).gsub('about', '') %></span>
               </div>
               <div class="content">
                 <%= post.content %>
@@ -48,16 +48,16 @@
             </div>
           <% end %>
         </div>
-    </div>
+      </div>
 
     </div>
-        <div class="three wide column">
-        <div class="ui right internal dividing rail" style="
-    border-left: white;">
-          <div class="ui segment">
-            <%= render 'shared/links'%>
-          </div>
+    <div class="three wide column">
+      <div class="ui right internal dividing rail" style="
+      border-left: white;">
+        <div class="ui segment">
+          <%= render 'shared/links' %>
         </div>
       </div>
+    </div>
   </div>
 </div>
