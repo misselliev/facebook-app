@@ -3,35 +3,61 @@
   Posts index
 </h2>
 
-<div class="ui cards centered aligned">
-  <% @posts.each do |post| %>
-    <div class="ui card">
-      <div class="content">
-        <div class="right floated meta"><%= time_ago_in_words(post.created_at, include_seconds: true).gsub('about','') %></div>
-        <div  class="ui avatar image"><%= image_tag('profile.jpg') %></div> <%= post.author.name %>  <%= post.author.lastname %>
-      </div>
-      <div class="content">
-        <%= post.content %>
-        <br>
-        <br>
-      </div>
-      <div class="content">
-    <span class="right floated">
-      <%= link_to create_like_path(post), method: :post do %>
-        <i class="heart teal like icon"></i>
-      <% end %>
-      <small class="meta"><%= post.likes.count %> likes</small>
-    </span>
-        <i class="comment teal outline icon"></i>
-        <small class="meta"><%= post.comments.count %> comments</small>
-
-      </div>
-      <%= link_to post_path(post) do %>
-        <div class="ui bottom attached button">
-          <i class="envelope outline icon"></i>
-          Open
+<div class="ui grid">
+  <div class="row">
+    <div class="three wide column">
+      <div class="ui left internal dividing rail" style="
+    border-right: white;">
+        <div class="ui segment">
+          <%= render 'shared/links'%>
         </div>
-      <% end %>
+      </div>
     </div>
-  <% end %>
+
+    <div class="ten wide column">
+      <div class="">
+        <div class="centered aligned">
+          <% @posts.each do |post| %>
+            <div class="ui raised segment">
+              <div class="content">
+                <div  class="ui avatar image"><%= image_tag('profile.jpg') %></div> <%= post.author.name %>  <%= post.author.lastname %>
+                <span class="right aligned meta"><%= time_ago_in_words(post.created_at, include_seconds: true).gsub('about','') %></span>
+              </div>
+              <div class="content">
+                <%= post.content %>
+                <br>
+                <br>
+              </div>
+              <div class="content">
+            <span class="right floated">
+              <%= link_to create_like_path(post), method: :post do %>
+                <i class="heart teal like icon"></i>
+              <% end %>
+              <small class="meta"><%= post.likes.count %> likes</small>
+            </span>
+                <i class="comment teal outline icon"></i>
+                <small class="meta"><%= post.comments.count %> comments</small>
+
+              </div>
+              <%= link_to post_path(post) do %>
+                <div class="ui bottom attached button">
+                  <i class="envelope outline icon"></i>
+                  Open
+                </div>
+              <% end %>
+            </div>
+          <% end %>
+        </div>
+    </div>
+
+    </div>
+        <div class="three wide column">
+        <div class="ui right internal dividing rail" style="
+    border-left: white;">
+          <div class="ui segment">
+            <%= render 'shared/links'%>
+          </div>
+        </div>
+      </div>
+  </div>
 </div>
