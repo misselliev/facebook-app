@@ -9,6 +9,9 @@ Rails.application.routes.draw do
   resources :posts, only: %i[new create index show edit update]
   get 'posts_index', to: 'posts#index'
   match '/posts/create', to: 'posts#create', via: :post, as: :create_post
+  match '/likes/create/:id', to: 'likes#create', via: :post, as: :create_like
 
+  get 'comments/new'
+  match '/comments/create/:id', to: 'comments#create', via: :post, as: :create_comment
 
 end

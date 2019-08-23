@@ -20,3 +20,23 @@
   <div><%= link_to 'Post index', posts_index_path%></div>
   <div><%= link_to 'Users index', users_index_path%></div>
 </div>
+<br>
+<br>
+<div class="ui centered grid">
+  <%= render 'shared/comment_form' %>
+</div>
+<div class="ui divider"></div>
+<h3 class="ui header teal center aligned">Share your opinions</h3>
+<br>
+<div class="ui cards centered grid">
+  <% @post.comments.each do |comm| %>
+    <div class="ui card">
+      <div class="content">
+        <%= comm.content %>
+        <div class="meta"><%= comm.commenter.name %> <%= comm.commenter.lastname %></div>
+        <div class="meta"><%= time_ago_in_words(comm.created_at, include_seconds: true).gsub('about','') %></div>
+      </div>
+    </div>
+  <% end %>
+</div>
+
