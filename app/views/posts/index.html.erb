@@ -30,7 +30,7 @@
               </div>
               <div class="content">
             <span class="right floated">
-              <%= link_to create_like_path(post), method: :post do %>
+              <%= link_to create_like_path(post, from: 'index'), method: :post do %>
                 <i class="heart teal like icon"></i>
               <% end %>
               <small class="meta"><%= post.likes.count %> likes</small>
