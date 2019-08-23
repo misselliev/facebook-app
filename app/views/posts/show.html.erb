@@ -1,11 +1,9 @@
 <div class="ui">
   <br/>
   <div class="ui container">
-    <h2 class="ui header">
-      <i class="ui envelope open outline icon"></i>
-      <div class="content">
-       Post
-      </div>
+    <h2 class="ui center aligned header">
+        Post
+        <i class="ui envelope open outline icon"></i>
     </h2>
 
   </div>
@@ -16,7 +14,6 @@
           <%= image_tag('profile.jpg', class: "ui avatar image") %>
           <div class="content">
             <div class="ui sub header"><%= "#{current_user.name} #{current_user.lastname}" %></div>
-
             <small style="color: grey"><%= time_ago_in_words(@post.created_at, include_seconds: true).gsub('about', '') %></small>
           </div>
         </div>
