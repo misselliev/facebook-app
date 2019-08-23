@@ -1,42 +1,58 @@
+<div class="ui placeholder segment">
+  <div class="ui two column stackable divided grid container">
+    <div class="column">
 
-<h2 class="ui center aligned icon header">
-  <i class="circular teal envelope open outline icon"></i>
-  Post
-</h2>
 
-<div class="ui centered grid">
-  <br>
-  <div class="ui card">
-    <div class="content">
-      <%= @post.content %>
-      <div class="meta">Author: <%= @post.author.name %></div>
+      <div class="ui grid dividing large header">
+        <div class="left floated six wide column">
+          Post
+        </div>
+        <div class="right floated  right aligned six wide column">
+          <i class="ui teal envelope open outline icon"></i>
+        </div>
+      </div>
+
+      <div class="ui centered grid">
+        <br>
+        <div class="ui card">
+          <div class="content">
+            <%= @post.content %>
+            <div class="meta">Author: <%= @post.author.name %></div>
+          </div>
+        </div>
+        <br>
+      </div>
+
+      <div class="ui centered grid">
+        <div><%= link_to 'Edit post', edit_post_path(@post) %></div>
+        <div><%= link_to 'Post index', posts_index_path %></div>
+        <div><%= link_to 'Users index', users_index_path %></div>
+      </div>
+      <br>
+      <br>
+      <%= render 'shared/comment_form' %>
     </div>
-  </div>
-  <br>
-</div>
+    <div class="column">
+      <div class="ui grid dividing large header">
+        <div class="left floated six wide column">
+          Comments
+        </div>
+        <div class="right floated  right aligned six wide column">
+          <i class="teal comments outline icon"></i>
+        </div>
+      </div>
 
-<div class="ui centered grid">
-  <div><%= link_to 'Edit post', edit_post_path(@post)%></div>
-  <div><%= link_to 'Post index', posts_index_path%></div>
-  <div><%= link_to 'Users index', users_index_path%></div>
-</div>
-<br>
-<br>
-<div class="ui centered grid">
-  <%= render 'shared/comment_form' %>
-</div>
-<div class="ui divider"></div>
-<h3 class="ui header teal center aligned">Share your opinions</h3>
-<br>
-<div class="ui cards centered grid">
-  <% @post.comments.each do |comm| %>
-    <div class="ui card">
-      <div class="content">
-        <%= comm.content %>
-        <div class="meta"><%= comm.commenter.name %> <%= comm.commenter.lastname %></div>
-        <div class="meta"><%= time_ago_in_words(comm.created_at, include_seconds: true).gsub('about','') %></div>
+      <div class="ui cards centered grid scrollable">
+        <% @post.comments.each do |comm| %>
+          <div class="ui card">
+            <div class="content">
+              <%= comm.content %>
+              <div class="meta"><%= comm.commenter.name %> <%= comm.commenter.lastname %></div>
+              <div class="meta"><%= time_ago_in_words(comm.created_at, include_seconds: true).gsub('about', '') %></div>
+            </div>
+          </div>
+        <% end %>
       </div>
     </div>
-  <% end %>
+  </div>
 </div>
-
