@@ -1,25 +1,39 @@
-<div class="ui segment">
+<div class="ui">
+  <div class="ui segment">
+    <div class="ui segments">
+      <div class="ui segment">
+        <div class="ui grid header">
+          <div class="left floated column">Post</div>
+          <div class="right floated right aligned column">
+            <i class="ui teal envelope open outline icon"></i>
+          </div>
+        </div>
+      </div>
+      <div class="ui segment">
+        <div class="content">
+          <%= @post.content %>
+          <%= link_to edit_post_path(@post) do %>
+            <div class="ui bottom right attached teal tiny label">EDIT</div>
+          <% end %>
+          <div class="meta"><%= "#{@post.author.name} #{@post.author.lastname}" %></div>
+        </div>
+      </div>
+      <div class="ui segment">
+        <div class="content">
+            <span class="right floated">
+              <%= link_to create_like_path(@post), method: :post do %>
+                <i class="heart teal like icon"></i>
+              <% end %>
+              <small class="meta"><%= @post.likes.count %> likes</small>
+            </span>
+          <i class="comment teal outline icon"></i>
+          <small class="meta"><%= @post.comments.count %> comments</small>
 
-
-  <div class="ui grid dividing large header">
-    <div class="left floated column">
-      Post
-    </div>
-    <div class="right floated right aligned column">
-      <i class="ui teal envelope open outline icon"></i>
-    </div>
-  </div>
-
-  <div class="ui centered grid">
-    <br>
-    <div class="ui card">
-      <div class="content">
-        <%= @post.content %>
-        <div class="meta">Author: <%= @post.author.name %></div>
+        </div>
       </div>
     </div>
-    <br>
   </div>
+
 
   <div class="ui centered dividing grid">
     <div><%= link_to 'Edit post', edit_post_path(@post) %></div>
@@ -72,4 +86,5 @@
       </div>
     </div>
   </div>
+</div>
 

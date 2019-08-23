@@ -1,5 +1,5 @@
 class LikesController < ApplicationController
-  before_action :authorized?, if: current_user
+  before_action :authorized?
   def create
     @like = current_user.likes.build(post_id: params[:id])
     if @like.save
