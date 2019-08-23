@@ -1,49 +1,56 @@
 <div class="ui">
-  <div class="ui segment">
-    <div class="ui segments">
-      <div class="ui segment">
-        <div class="ui grid header">
-          <div class="left floated column">Post</div>
-          <div class="right floated right aligned column">
-            <i class="ui teal envelope open outline icon"></i>
+  <br/>
+  <div class="ui container">
+    <h2 class="ui header">
+      <i class="ui envelope open outline icon"></i>
+      <div class="content">
+       Post
+      </div>
+    </h2>
+
+  </div>
+  <div class="ui segments">
+    <div class="ui segment">
+      <div class="ui horizontal list">
+        <div class="item">
+          <%= image_tag('profile.jpg', class: "ui avatar image") %>
+          <div class="content">
+            <div class="ui sub header"><%= "#{current_user.name} #{current_user.lastname}" %></div>
+
+            <small style="color: grey"><%= time_ago_in_words(@post.created_at, include_seconds: true).gsub('about', '') %></small>
           </div>
         </div>
       </div>
-      <div class="ui segment">
-        <div class="content">
-          <%= @post.content %>
-          <%= link_to edit_post_path(@post) do %>
-            <div class="ui bottom right attached mini label">EDIT</div>
+    </div>
+    <div class="ui segment">
+      <div class="content">
+        <%= @post.content %>
+        <%= link_to edit_post_path(@post) do %>
+          <div class="ui bottom right attached mini label">EDIT</div>
+        <% end %>
+        <div class="meta"><%= "#{@post.author.name} #{@post.author.lastname}" %></div>
+      </div>
+    </div>
+    <div class="ui segment card">
+      <div class="content">
+        <span class="left floated">
+          <%= link_to create_like_path(@post, from: 'show'), method: :post do %>
+            <i class="heart teal like icon"></i>
           <% end %>
-          <div class="meta"><%= "#{@post.author.name} #{@post.author.lastname}" %></div>
-        </div>
-      </div>
-      <div class="ui segment card">
-        <div class="content">
-          <span class="left floated">
-            <%= link_to create_like_path(@post, from: 'show'), method: :post do %>
-              <i class="heart teal like icon"></i>
-            <% end %>
-            <small class="meta"> <%= "  #{@post.likes.count} likes" %></small>
-          </span>
-          <span class="right floated">
-            <i class="comment teal outline icon"></i>
-            <small class="meta right floated"><%= @post.comments.count %> comments</small>
-          </span>
+          <small class="meta"> <%= "  #{@post.likes.count} likes" %></small>
+        </span>
+        <span class="right floated">
+          <i class="comment teal outline icon"></i>
+          <small class="meta right floated"><%= @post.comments.count %> comments</small>
+      </span>
 
-        </div>
       </div>
+    </div>
+    <div class="ui segment">
+      <%= render 'shared/comment_form' %>
     </div>
   </div>
 
-
-  <div class="ui centered dividing grid">
-    <div><%= link_to 'Edit post', edit_post_path(@post) %></div>
-    <div><%= link_to 'Post index', posts_index_path %></div>
-    <div><%= link_to 'Users index', users_index_path %></div>
-  </div>
-  <br>
-  <br>
   <div class="ui">
 
     <br/>
@@ -57,9 +64,6 @@
             <i class="teal comments outline icon"></i>
           </div>
         </div>
-      </div>
-      <div class="ui segment">
-        <%= render 'shared/comment_form' %>
       </div>
       <div class="ui segments">
         <% @post.comments.each do |comm| %>
@@ -88,5 +92,15 @@
       </div>
     </div>
   </div>
+<% content_for :right_side do %>
+  <div class="container">
+    HAHAHAH
+  </div>
+<% end %>
+<% content_for :left_side do %>
+  <div class="container">
+    OHHHHHHHH
+  </div>
+<% end %>
 </div>
 
