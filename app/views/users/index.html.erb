@@ -1,16 +1,19 @@
-<h2 class="ui center aligned icon header">
-  <i class="circular teal users icon"></i>
-  Users index
-</h2>
-
-<div class="ui cards centered aligned">
+<div class="ui container">
+  <h2 class="ui center aligned header">
+      Users Index 
+      <i class="ui envelope open outline icon"></i>
+  </h2>
+</div>
+<br>
+<div class="centered aligned">
 <% @users.each do |user|%>
-  <div class="card">
+  <div class="ui raised segment">
     <div class="content">
       <div class="header"><%=user.name%> <%=user.lastname%></div>
-      <div class="meta"><%=user.email%></div>
+      <small style="color: grey"><%=user.email%></small>
     </div>
   </div>
 <%end%>
+<%= render 'shared/columns'%>
 </div>
 
