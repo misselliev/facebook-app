@@ -2,8 +2,8 @@
   <br/>
   <div class="ui container">
     <h2 class="ui center aligned header">
-        Post
-        <i class="ui envelope open outline icon"></i>
+      Post
+      <i class="ui envelope open outline icon"></i>
     </h2>
 
   </div>
@@ -39,46 +39,34 @@
         <span class="right floated">
           <i class="comment teal outline icon"></i>
           <small class="meta right floated"><%= @post.comments.count %> comments</small>
-      </span>
-
+        </span>
       </div>
     </div>
     <div class="ui segment">
       <%= render 'shared/comment_form' %>
     </div>
-  </div>
-
-  <div class="ui">
-
-    <br/>
-    <div class="ui segments">
-      <div class="ui segment">
-        <div class="ui grid large header">
-          <div class="left floated column">
-            Comments
-          </div>
-          <div class="right floated right aligned column">
-            <i class="teal comments outline icon"></i>
-          </div>
-        </div>
+    <div class="ui accordion">
+      <div class="ui title trigger attached button" tabindex="0">
+        <i class="icon dropdown"></i>
+        Comments
       </div>
-      <div class="ui segments">
+      <div class="ui accordion-content">
+        <br/>
         <% @post.comments.each do |comm| %>
           <div class="ui segment">
             <div class="ui grid">
-              <div class="three wide column">
+              <div class="four wide column">
                 <div class="ui horizontal list">
                   <div class="item">
                     <%= image_tag('profile.jpg', class: "ui avatar image") %>
                     <div class="content">
                       <div class="ui sub header"><%= "#{comm.commenter.name} #{comm.commenter.lastname}" %></div>
-
                       <small style="color: grey"><%= time_ago_in_words(comm.created_at, include_seconds: true).gsub('about', '') %></small>
                     </div>
                   </div>
                 </div>
               </div>
-              <div class="thirteen wide column">
+              <div class="twelve wide column">
                 <div class="content">
                   <%= comm.content %>
                 </div>
@@ -89,6 +77,8 @@
       </div>
     </div>
   </div>
-<%= render 'shared/columns'%>
+  <%= render 'shared/columns' %>
 </div>
+
+
 
