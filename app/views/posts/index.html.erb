@@ -1,49 +1,57 @@
-<h2 class="ui center aligned icon header">
-  <i class="circular teal folder open outline icon"></i>
-  Posts index
-</h2>
-
-
+<div class="ui container">
+  <h2 class="ui center aligned header">
+      Post Index 
+      <i class="ui envelope open outline icon"></i>
+  </h2>
+</div>
+<br>
 <div class="centered aligned">
   <% @posts.each do |post| %>
-    <div class="ui raised segment">
-      <div class="content">
-        <span class="ui avatar image"><%= image_tag('profile.jpg') %></span> 
-        <span><%= post.author.name %>  <%= post.author.lastname %></span>
-        <span class="right aligned meta"><%= time_ago_in_words(post.created_at, include_seconds: true).gsub('about', '') %></span>
+  <div class="ui raised segments">
+      <div class="ui segment">
+        <div class="ui horizontal list">
+          <div class="item">
+          <%= image_tag('profile.jpg', class: "ui avatar image") %>
+          <div class="content">
+            <div class="ui sub header"><%= "#{post.author.name} #{post.author.lastname}" %></div>
+            <small style="color: grey"><%= time_ago_in_words(post.created_at, include_seconds: true).gsub('about', '') %></small>
+          </div>
+        </div>
       </div>
+    </div> 
+    <div class="ui segment">
       <div class="content">
         <%= post.content %>
-        <br>
-        <br>
+      </div>
+    </div>
+    <div class="ui segment card">
+      <div class="content">
+        <span class="left floated">
+          <%= link_to create_like_path(post, from: 'show'), method: :post do %>
+            <i class="heart teal like icon"></i>
+          <% end %>
+          <small class="meta"> <%= "  #{post.likes.count} likes" %></small>
+        </span>
+        <span class="right floated">
+          <i class="comment teal outline icon"></i>
+          <small class="meta right floated"><%= post.comments.count %> comments</small>
+      </span>
       </div>
       <div class="content">
-    <span class="right floated">
-      <%= link_to create_like_path(post, from: 'index'), method: :post do %>
-        <i class="heart teal like icon"></i>
-      <% end %>
-      <small class="meta"><%= post.likes.count %> likes</small>
-    </span>
-        <i class="comment teal outline icon"></i>
-        <small class="meta"><%= post.comments.count %> comments</small>
-      </div>
-      <%= link_to post_path(post) do %>
+        <%= link_to post_path(post) do %>
         <div class="ui bottom attached button">
           <i class="envelope outline icon"></i>
           Open
         </div>
-      <% end %>
+        <% end %>
+      </div>
     </div>
-  <% end %>
-  <% content_for :right_side do %>
-  <div class="container">
   </div>
   <% end %>
-  <% content_for :left_side do %>
-    <div class="container">
-      <%= render 'shared/links'%>
-    </div>
-  <% end %>
+  <br>
+  <br>
+<%= render 'shared/columns'%>
+  <br>
 </div>
 
 
