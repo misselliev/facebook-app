@@ -1,4 +1,5 @@
 class PostsController < ApplicationController
+  before_action :access_post, only: :edit
   def new
     @post = Post.new
   end
@@ -33,11 +34,20 @@ class PostsController < ApplicationController
     else
       render 'edit'
     end
-
+    
   end
 
-
   private
+
+  def access_post
+    post = current_user.posts.find_by(id: params[:id])
+    if post
+      redirect_to edit_post_path(post)
+    else
+      flash[:alert] = "You are not authorized to do this" 
+      redirect_to post_path(params[:id])
+    end
+  end
 
   def post_params
     params.require(:post).permit(:content, :author_id)

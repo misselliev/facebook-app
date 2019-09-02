@@ -13,7 +13,7 @@
         <div class="item">
           <%= image_tag('profile.jpg', class: "ui avatar image") %>
           <div class="content">
-            <div class="ui sub header"><%= "#{current_user.name} #{current_user.lastname}" %></div>
+            <div class="ui sub header"><%= "#{@post.author.name} #{@post.author.lastname}" %></div>
             <small style="color: grey"><%= time_ago_in_words(@post.created_at, include_seconds: true).gsub('about', '') %></small>
           </div>
         </div>
@@ -22,8 +22,10 @@
     <div class="ui segment">
       <div class="content">
         <%= @post.content %>
-        <%= link_to edit_post_path(@post) do %>
-          <div class="ui bottom right attached mini label">EDIT</div>
+        <% if post_owner?(@post) %>
+          <%= link_to edit_post_path(@post) do %>
+            <div class="ui bottom right attached mini label">EDIT</div>
+          <% end %>
         <% end %>
       </div>
     </div>
