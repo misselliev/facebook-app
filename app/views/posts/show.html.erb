@@ -30,9 +30,8 @@
     <div class="ui segment card">
       <div class="content">
         <span class="left floated">
-          <%= link_to create_like_path(@post, from: 'show'), method: :post do %>
-            <i class="heart teal like icon"></i>
-          <% end %>
+          <%= render 'shared/check_likes', locals: { post: @post , from: 'show'} %>
+
           <small class="meta"> <%= "  #{@post.likes.count} likes" %></small>
         </span>
         <span class="right floated">

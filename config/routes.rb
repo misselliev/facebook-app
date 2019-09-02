@@ -10,6 +10,7 @@ Rails.application.routes.draw do
   get 'posts_index', to: 'posts#index'
   match '/posts/create', to: 'posts#create', via: :post, as: :create_post
   match '/likes/create/:id', to: 'likes#create', via: :post, as: :create_like
+  delete '/likes/destroy/:id', to: 'likes#destroy', as: :destroy_like
 
   get 'comments/new'
   match '/comments/create/:id', to: 'comments#create', via: :post, as: :create_comment
