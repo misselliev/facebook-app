@@ -14,12 +14,13 @@ class PostsController < ApplicationController
   end
 
   def index
-    @posts = Post.all
+    @posts = Post.all.recent_posts
   end
 
   def show
     @post = Post.find(params[:id])
     @comment = Comment.new
+    @index_comments = @post.comments.all.recent_comments
   end
 
   def edit
