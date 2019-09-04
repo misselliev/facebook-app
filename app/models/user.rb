@@ -24,9 +24,9 @@ class User < ApplicationRecord
     email.downcase!
   end
 
-  def friends
-    friends_array = friendships.map { |friendship| friendship.friend if friendship.confirmed }
-    friends_array + inverse_friendships.map { |friendship| friendship.user if friendship.confirmed }
-    friends_array.compact
+  def confirm(friend_request)
+    friend_request.confirmed = true
+    user = User.find_by_id(friend_request.friend_id)
+    user.friendships.build(friend_id: friend_request.user_id, confirmed: true)
   end
 end
