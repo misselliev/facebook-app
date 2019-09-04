@@ -69,5 +69,9 @@ RSpec.describe User, type: :model do
       assc = described_class.reflect_on_association(:friendships)
       expect(assc.macro).to eq :has_many
     end
+    it "has many inverse_friendships" do
+      assc = described_class.reflect_on_association(:inverse_friendships)
+      expect(assc.macro).to eq :has_many
+    end
   end
 end
