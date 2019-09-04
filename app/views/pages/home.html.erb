@@ -1,12 +1,14 @@
-<h4 class="ui center aligned medium icon header">
-  <i class="circular teal users icon"></i>
-  Welcome to Fakebook app!
-</h4>
+<% content_for :landing do %>
+  <h4 class="ui center aligned medium icon header">
+    <i class="circular teal users icon"></i>
+    Welcome to Fakebook app!
+  </h4>
 
-<div class="ui centered relaxed four column grid">
-  <div class="seven wide column">
+  <div class="ui centered relaxed four column grid">
+    <div class="seven wide column">
+    </div>
+    <div class="seven wide column">
+      <%= render 'shared/signup_form'%>
+    </div>
   </div>
-  <div class="seven wide column">
-    <%= render 'shared/signup_form'%>
-  </div>
-</div>
+<% end %>

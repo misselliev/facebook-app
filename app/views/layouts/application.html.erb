@@ -1,35 +1,45 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <title>Fakebook</title>
-    <%= csrf_meta_tags %>
-    <%= csp_meta_tag %>
+<head>
+  <title>Fakebook</title>
+  <%= csrf_meta_tags %>
+  <%= csp_meta_tag %>
 
-    <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
-    <%= javascript_include_tag 'application' %>
-  </head>
+  <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+  <%= javascript_include_tag 'application' %>
+</head>
 
-  <body>
-    <div class="ui teal inverted small menu attached">
-      <div class="ui container">
-        <%= render 'shared/navigation'%>
-      </div>
+<body>
+<div class="ui teal inverted small menu attached">
+  <div class="ui container">
+    <%= render 'shared/navigation' %>
+  </div>
+</div>
+<div class="ui">
+  <% if notice %>
+    <div class="ui positive message attached">
+      <%= notice %>
     </div>
-    <div class="ui">
-      <% if notice %>
-        <div class="ui positive message attached">
-          <%= notice %>
-        </div>
-      <% end %>
-      <% if alert %>
-        <div class="ui negative message attached">
-          <%= alert %>
-        </div>
-      <% end %>
+  <% end %>
+  <% if alert %>
+    <div class="ui negative message attached">
+      <%= alert %>
     </div>
-    <br>
-    <div class="ui container">
-      <%= yield %>
-    </div>
-  </body>
+  <% end %>
+</div>
+<br/>
+<div class="ui container"><%= yield(:landing) %></div>
+<div class="ui grid">
+  <div class="four wide column">
+
+    <%= yield(:left_side) %>
+  </div>
+  <div class="eight wide column">
+    <%= yield %>
+  </div>
+  <div class="four wide column">
+    <%= yield(:right_side) %>
+  </div>
+</div>
+</body>
 </html>

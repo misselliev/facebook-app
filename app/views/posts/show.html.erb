@@ -1,22 +1,84 @@
+<div class="ui">
+  <br/>
+  <div class="ui container">
+    <h2 class="ui center aligned header">
+      Post
+      <i class="ui envelope open outline icon"></i>
+    </h2>
 
-<h2 class="ui center aligned icon header">
-  <i class="circular teal envelope open outline icon"></i>
-  Post
-</h2>
+  </div>
+  <div class="ui segments">
+    <div class="ui segment">
+      <div class="ui horizontal list">
+        <div class="item">
+          <%= image_tag('profile.jpg', class: "ui avatar image") %>
+          <div class="content">
+            <div class="ui sub header"><%= "#{@post.author.name} #{@post.author.lastname}" %></div>
+            <small style="color: grey"><%= time_ago_in_words(@post.created_at, include_seconds: true).gsub('about', '') %></small>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="ui segment">
+      <div class="content">
+        <%= @post.content %>
+        <% if post_owner?(@post) %>
+          <%= link_to edit_post_path(@post) do %>
+            <div class="ui bottom right attached mini label">EDIT</div>
+          <% end %>
+        <% end %>
+      </div>
+    </div>
+    <div class="ui segment card">
+      <div class="content">
+        <span class="left floated">
+          <%= render 'shared/check_likes', locals: { post: @post , from: 'show'} %>
 
-<div class="ui centered grid">
-  <br>
-  <div class="ui card">
-    <div class="content">
-      <%= @post.content %>
-      <div class="meta">Author: <%= @post.author.name %></div>
+          <small class="meta"> <%= "  #{@post.likes.count} likes" %></small>
+        </span>
+        <span class="right floated">
+          <i class="comment teal outline icon"></i>
+          <small class="meta right floated"><%= @post.comments.count %> comments</small>
+        </span>
+      </div>
+    </div>
+    <div class="ui segment">
+      <%= render 'shared/comment_form' %>
+    </div>
+    <div class="ui accordion">
+      <div class="ui title trigger attached button" tabindex="0">
+        <i class="icon dropdown"></i>
+        Comments
+      </div>
+      <div class="ui accordion-content">
+        <br/>
+        <% @index_comments.each do |comm| %>
+          <div class="ui segment">
+            <div class="ui grid">
+              <div class="four wide column">
+                <div class="ui horizontal list">
+                  <div class="item">
+                    <%= image_tag('profile.jpg', class: "ui avatar image") %>
+                    <div class="content">
+                      <div class="ui sub header"><%= "#{comm.commenter.name} #{comm.commenter.lastname}" %></div>
+                      <small style="color: grey"><%= time_ago_in_words(comm.created_at, include_seconds: true).gsub('about', '') %></small>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="twelve wide column">
+                <div class="content">
+                  <%= comm.content %>
+                </div>
+              </div>
+            </div>
+          </div>
+        <% end %>
+      </div>
     </div>
   </div>
-  <br>
+  <%= render 'shared/columns' %>
 </div>
 
-<div class="ui centered grid">
-  <div><%= link_to 'Edit post', edit_post_path(@post)%></div>
-  <div><%= link_to 'Post index', posts_index_path%></div>
-  <div><%= link_to 'Users index', users_index_path%></div>
-</div>
+
+

@@ -1,24 +1,54 @@
-<h2 class="ui center aligned icon header">
-  <i class="circular teal folder open outline icon"></i>
-  Posts index
-</h2>
-
-<div class="ui cards centered aligned">
+<div class="ui container">
+  <h2 class="ui center aligned header">
+    Post Index
+    <i class="ui envelope open outline icon"></i>
+  </h2>
+</div>
+<br>
+<div class="centered aligned">
   <% @posts.each do |post| %>
-    <div class="card">
-      <div class="content">
-        <%= post.content %>
-        <br>
-        <br>
-        <div class="meta">Author: <%= post.author.name %> <%= post.author.lastname %></div>
-      </div>
-      <%= link_to post_path(post) do %>
-        <div class="ui bottom attached button">
-          <i class="envelope outline icon"></i>
-          Open
+    <div class="ui raised segments">
+      <div class="ui segment">
+        <div class="ui horizontal list">
+          <div class="item">
+            <%= image_tag('profile.jpg', class: "ui avatar image") %>
+            <div class="content">
+              <div class="ui sub header"><%= "#{post.author.name} #{post.author.lastname}" %></div>
+              <small style="color: grey"><%= time_ago_in_words(post.created_at, include_seconds: true).gsub('about', '') %></small>
+            </div>
+          </div>
         </div>
-      <% end %>
+      </div>
+      <div class="ui segment">
+        <div class="content">
+          <%= post.content %>
+        </div>
+      </div>
+      <div class="ui segment card">
+        <div class="content">
+          <span class="left floated">
+            <%= render 'shared/check_likes', locals: { post: post , from: 'index'} %>
+
+            <small class="meta"> <%= "  #{post.likes.count} likes" %></small>
+          </span>
+          <span class="right floated">
+            <i class="comment teal outline icon"></i>
+            <small class="meta right floated"><%= post.comments.count %> comments</small>
+          </span>
+        </div>
+        <%= link_to post_path(post) do %>
+          <div class="ui bottom attached button">
+            <i class="envelope outline icon"></i>
+            Open
+          </div>
+        <% end %>
+      </div>
     </div>
   <% end %>
+  <br>
+  <br>
+  <%= render 'shared/columns' %>
+  <br>
 </div>
+
 
