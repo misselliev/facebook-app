@@ -13,7 +13,9 @@
           <div class="item">
             <%= image_tag('profile.jpg', class: "ui avatar image") %>
             <div class="content">
-              <div class="ui sub header"><%= "#{post.author.name} #{post.author.lastname}" %></div>
+              <%= link_to user_path(post.author) do %>
+                <div class="ui sub header"><%= "#{post.author.name} #{post.author.lastname}" %></div>
+              <% end %>
               <small style="color: grey"><%= time_ago_in_words(post.created_at, include_seconds: true).gsub('about', '') %></small>
             </div>
           </div>
@@ -27,7 +29,7 @@
       <div class="ui segment card">
         <div class="content">
           <span class="left floated">
-            <%= render 'shared/check_likes', locals: { post: post , from: 'index'} %>
+            <%= render 'shared/check_likes', locals: {post: post, from: 'index'} %>
 
             <small class="meta"> <%= "  #{post.likes.count} likes" %></small>
           </span>

@@ -11,6 +11,14 @@ class UsersController < ApplicationController
     @users = User.all
   end
 
+  def show
+    @user = User.find_by_id(params[:id])
+    @joined_at = @user.created_at.year
+    @num_friends = @user.friendships.confirmed.count
+    @name = "#{@user.name} #{@user.lastname}"
+    @email = @user.email
+  end
+
   private
 
   def user_params

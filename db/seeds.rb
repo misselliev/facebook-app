@@ -3,11 +3,14 @@ emails = %w(eli@woof.com santiago@woof.com dulce@woof.com lulu@woof.com)
 
 # Creating users
 4.times do |i|
+  date_time = Faker::Time.between_dates(from: 3.years.ago - 1, to: Date.today, period: :all)
   user = User.create!(name: Faker::Name.unique.first_name,
                      lastname: Faker::Name.last_name,
                      email: emails[i],
                      password: '123456',
-                     password_confirmation: '123456')
+                     password_confirmation: '123456',
+                      created_at: date_time,
+                      updated_at: date_time)
 
 # Creating posts
   5.times do

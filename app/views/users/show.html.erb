@@ -1,0 +1,35 @@
+<div class="ui container">
+  <h2 class="ui center aligned header">
+    User Profile
+    <i class="ui user outline icon"></i>
+  </h2>
+</div>
+<br>
+<div class="centered aligned">
+  <% content_for :left_side do %>
+    <div class="ui card">
+      <div class="image">
+        <%= image_tag('profile.jpg') %>
+      </div>
+      <div class="content">
+        <div class="header"><%= @name %></div>
+        <div class="meta">
+          <a><%= @email %></a>
+        </div>
+        <div class="description">
+          Needs to fullfill
+        </div>
+      </div>
+      <div class="extra content">
+      <span class="right floated">
+        Joined in <%= @joined_at %>
+      </span>
+        <span>
+        <i class="user icon"></i>
+          <%= @num_friends %> Friends
+      </span>
+      </div>
+    </div>
+  <% end %>
+</div>
+

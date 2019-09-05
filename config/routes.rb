@@ -1,11 +1,10 @@
 Rails.application.routes.draw do
   get 'friendships/create'
-  get 'friendships/confirm'
   root 'pages#home'
 
   devise_for :users, :controllers => { registrations: 'registrations' }
   
-  resources :users, only: %i[new create index]
+  resources :users, only: %i[new create index show]
   get 'users_index', to: 'users#index'
   
   resources :posts, only: %i[new create index show edit update]
