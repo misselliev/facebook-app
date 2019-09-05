@@ -2,26 +2,26 @@
 
 FactoryBot.define do
   factory :friendship do
-    user1 = Factory.build(:user)
-    user2 = Factory.build(:user)
-    user3 = Factory.build(:user)
-    user4 = Factory.build(:user)
-
     trait :confirmed do
-      user_id { user1.id }
-      friend_id { user2.id }
+      user_id { 1 }
+      friend_id { Faker::Number.digit }
       confirmed { true }
     end
 
     trait :rejected do
-      user_id { user1.id }
-      friend_id { user3.id }
+      user_id { 1 }
+      friend_id { Faker::Number.digit }
       confirmed { false }
     end
 
     trait :pending do
-      user_id { user1.id }
-      friend_id { user4.id }
+      user_id { 1 }
+      friend_id { Faker::Number.digit }
+    end
+
+    trait :incomplete do
+      user_id {}
+      friend_id{}
     end
   end
 end

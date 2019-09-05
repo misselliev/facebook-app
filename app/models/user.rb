@@ -24,9 +24,14 @@ class User < ApplicationRecord
     email.downcase!
   end
 
-  def confirm(friend_request)
-    friend_request.confirmed = true
-    user = User.find_by_id(friend_request.friend_id)
-    user.friendships.build(friend_id: friend_request.user_id, confirmed: true)
+  def self.confirm_friendship?(friend_request = nil)
+    if friend_request 
+      friend_request.confirmed = true
+      user = User.find_by_id(friend_request.friend_id)
+      user.friendships.build(friend_id: friend_request.user_id, confirmed: true).save
+    else
+      user = User.find_by_id(friend_request.friend_id)
+      user.friendships.build(friend_id: friend_request.user_id, confirmed: false).save
+    end
   end
 end
