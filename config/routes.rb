@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  get 'friendships/create'
+  get 'friendships/confirm'
   root 'pages#home'
 
   devise_for :users, :controllers => { registrations: 'registrations' }
