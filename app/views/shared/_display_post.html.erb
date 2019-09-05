@@ -1,0 +1,39 @@
+<div class="ui raised segments">
+  <div class="ui segment">
+    <div class="ui horizontal list">
+      <div class="item">
+        <%= image_tag('profile.jpg', class: "ui avatar image") %>
+        <div class="content">
+          <%= link_to user_path(object.author) do %>
+            <div class="ui sub header"><%= "#{object.author.name} #{object.author.lastname}" %></div>
+          <% end %>
+          <small style="color: grey"><%= time_ago_in_words(object.created_at, include_seconds: true).gsub('about', '') %></small>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="ui segment">
+    <div class="content">
+      <%= object.content %>
+    </div>
+  </div>
+  <div class="ui segment card">
+    <div class="content">
+      <span class="left floated">
+        <%= render 'shared/check_likes', locals: {post: object, from: 'index'} %>
+
+        <small class="meta"> <%= "  #{object.likes.count} likes" %></small>
+      </span>
+      <span class="right floated">
+        <i class="comment teal outline icon"></i>
+        <small class="meta right floated"><%= object.comments.count %> comments</small>
+      </span>
+    </div>
+    <%= link_to post_path(object) do %>
+      <div class="ui bottom attached button">
+        <i class="envelope outline icon"></i>
+        Open
+      </div>
+    <% end %>
+  </div>
+</div>
