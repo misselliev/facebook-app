@@ -9,7 +9,9 @@
 <% @users.each do |user|%>
   <div class="ui raised segment">
     <div class="content">
+    <%= link_to user_path(user) do %>
       <div class="header"><%=user.name%> <%=user.lastname%></div>
+    <%end%>
       <small style="color: grey"><%=user.email%></small>
     </div>
   </div>
