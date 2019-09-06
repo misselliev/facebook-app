@@ -7,7 +7,7 @@
 <br>
 <div class="centered aligned">
   <% @user.posts.each do |post| %>
-    <%= render 'shared/display_post', object: post%>
+    <%= render 'shared/display_post', locals: { object: post, from: 'user', user: @user}%>
   <% end %>
 
   <% content_for :left_side do %>

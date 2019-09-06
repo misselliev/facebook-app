@@ -7,12 +7,10 @@
 <br>
 <div class="centered aligned">
   <% @posts.each do |post| %>
-    <%= render 'shared/display_post', object: post%>
+    <%= render 'shared/display_post', locals: { object: post, from: 'index'} %>
   <% end %>
   <br>
   <br>
   <%= render 'shared/columns' %>
   <br>
 </div>
-
-
