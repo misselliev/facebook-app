@@ -35,5 +35,50 @@
       </div>
     </div>
   <% end %>
+  <% content_for :right_side do %>
+    <div class="ui card">
+      <div class="content">
+        <a class="header">Welcome <%= current_user.name%>!</a>
+        <br>
+        <div class="comments">
+          <i class="comment icon"></i>
+          <strong>Recents comments on your posts:</strong>
+          <br>
+          <br>
+          <% current_user.posts.each do |post| %>
+            <%= link_to post_path(post)do%>
+              <div><%= Comment.find_by_id(post).content%></div>
+              <div class="ui fitted divider"></div>
+            <%end%>
+          <% end %>
+        </div>
+        <br>
+        <div class="friend_requests">
+          <i class="user icon"></i>
+          <strong>Friends requests:</strong>
+          <br>
+          <br>
+          <% current_user.friendships.pending.each do |friend_req|%>
+          <div class="ui equal width form">
+            <div class="fields">
+              <div class="field"><%= User.find_by_id(friend_req.friend_id).name %></div>
+              <div class="field"><button class="mini positive ui button field">
+                <%= link_to 'Accept', friendships_create_path(friend_req.confirmed = true), method: :post%>
+              </button></div>
+              <%# current_user.create_friendship(friend_req.confirmed = true) %>
+              <div class="field"><button class="mini negative ui button field">Decline
+                <%= link_to 'Decline', friendships_create_path(friend_req.confirmed = false), method: :post%>
+              </button></div>
+              <%# user.create_friendship(friend_req.confirmed = false) %>
+            </div>
+          </div>
+          <div class="ui fitted divider"></div>
+          <br>
+          <% end %>
+        </div>
+      </div>
+    </div>
+  <% end %>
+
 </div>
 
