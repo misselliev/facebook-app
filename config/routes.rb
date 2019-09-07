@@ -4,7 +4,7 @@ Rails.application.routes.draw do
 
   devise_for :users, :controllers => { registrations: 'registrations' }
   
-  resources :users, only: %i[new create index show]
+  resources :users, only: %i[new create index show create_friendship]
   get 'users_index', to: 'users#index'
   
   resources :posts, only: %i[new create index show edit update]

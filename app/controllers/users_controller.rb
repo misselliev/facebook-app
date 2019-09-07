@@ -19,6 +19,11 @@ class UsersController < ApplicationController
     @email = @user.email
   end
 
+  def create_friendship
+    self.confirm_friendship?(friend_request=nil)
+  end
+
+
   private
 
   def user_params
