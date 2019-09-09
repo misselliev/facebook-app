@@ -61,13 +61,13 @@
           <% current_user.friendships.pending.each do |friend_req|%>
           <div class="ui equal width form">
             <div class="fields">
-              <div class="field"><%= User.find_by_id(friend_req.friend_id).name %></div>
+              <div class="field"><%= friend_req.friend.name %></div>
               <div class="field"><button class="mini positive ui button field">
-                <%= link_to 'Accept', friendships_create_path(friend_req.confirmed = true), method: :post%>
+                <%= link_to 'Accept', update_status_path(friend_request: friend_req, status: true), method: :post%>
               </button></div>
-              <%# current_user.create_friendship(friend_req.confirmed = true) %>
-              <div class="field"><button class="mini negative ui button field">Decline
-                <%= link_to 'Decline', friendships_create_path(friend_req.confirmed = false), method: :post%>
+              <%# current_user.create_friendship(status = true) %>
+              <div class="field"><button class="mini negative ui button field">
+                <%= link_to 'Decline', update_status_path(friend_request: friend_req, status: false), method: :post%>
               </button></div>
               <%# user.create_friendship(friend_req.confirmed = false) %>
             </div>

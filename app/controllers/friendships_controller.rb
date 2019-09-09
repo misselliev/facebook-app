@@ -7,4 +7,9 @@ class FriendshipsController < ApplicationController
       end
     end
   end
+
+  def update_status
+    byebug
+    Friendship.confirm_friendship?(params[:friend_request], params[:status])
+  end
 end
