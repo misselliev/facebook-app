@@ -16,6 +16,6 @@ Rails.application.routes.draw do
   get 'comments/new'
   match '/comments/create/:id', to: 'comments#create', via: :post, as: :create_comment
 
-  resources :friendships, only: %i[create update_status]
+  resources :friendships, only: %i[create destroy]
   match '/friendships/update_status/:id', to: 'friendships#update_status', via: :post, as: :update_status
 end
