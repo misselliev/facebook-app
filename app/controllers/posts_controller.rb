@@ -30,23 +30,22 @@ class PostsController < ApplicationController
   def update
     @post = Post.find(params[:id])
     if @post.update_attributes(post_params)
-      flash[:success] = 'Post updated'
-      redirect_to post_path(params[:id])
+      flash[:notice] = 'Post updated'
+      render post_path(params[:id])
     else
       render 'edit'
     end
-    
   end
 
   private
 
   def access_post
     post = current_user.posts.find_by(id: params[:id])
-    if post
-      redirect_to edit_post_path(post)
-    else
-      flash[:alert] = "You are not authorized to do this" 
+    if post.nil?
+      flash[:alert] = "You are not authorized to do this"
       redirect_to post_path(params[:id])
+    else
+      @post
     end
   end
 
