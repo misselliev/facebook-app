@@ -1,15 +1,24 @@
 class FriendshipsController < ApplicationController
   def create
-    unless current_user.friendships.find_by(user_id: current_user.id, friend_id: params[:friend_id], confirmed: false)
-      @friendship = current_user.friendship.build(friend_id: params[:friend_id])
-      if @friendship.save
-        flash[:notice] = 'Request sent'
-      end
+    @friendship = current_user.friendships.build(friend_id: params[:friend_id])
+    if @friendship.save
+      flash[:notice] = 'Request sent'
+      redirect_to user_path(params[:friend_id])
+    else
+      flash[:alert] = 'Something went wrong'
+    end
+  end
+
+  def destroy
+    friend_req = Friendship.find_by_id(params[:id])
+    if friend_req.delete
+      flash[:notice] = 'Request declined'
+    else
+      flash[:alert] = 'Something went wrong'
     end
   end
 
   def update_status
-    byebug
     Friendship.confirm_friendship?(params[:friend_request], params[:status])
   end
 end
