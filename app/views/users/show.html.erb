@@ -6,8 +6,8 @@
 </div>
 <br>
 <div class="centered aligned">
-  <% @user.posts.each do |post| %>
-    <%= render 'shared/display_post', locals: { object: post, from: 'user', user: @user}%>
+  <% @user.posts.recent_posts.each do |post| %>
+    <%= render 'shared/display_post', locals: {object: post, from: 'user', user: @user} %>
   <% end %>
 
   <% content_for :left_side do %>
@@ -33,23 +33,39 @@
           <%= @num_friends %> Friends
       </span>
       </div>
+      <% if @diff_profile_new_friend %>
+        <%= link_to friendships_create_path(friend_id: @user) do %>
+          <div class="ui bottom attached button">
+            <i class="add icon"></i>
+            Add Friend
+          </div>
+        <% end %>
+      <% elsif !@is_a_friend.nil? && @is_a_friend.confirmed != true %>
+        <div class="extra content">
+          <div class="right floated">
+            <p class="meta">Friend request sent</p>
+          </div>
+        </div>
+      <% end %>
     </div>
   <% end %>
   <% content_for :right_side do %>
     <div class="ui card">
       <div class="content">
-        <a class="header">Welcome <%= current_user.name%>!</a>
+        <a class="header">Welcome <%= current_user.name %>!</a>
         <br>
         <div class="comments">
           <i class="comment icon"></i>
           <strong>Recents comments on your posts:</strong>
           <br>
           <br>
-          <% current_user.posts.each do |post| %>
-            <%= link_to post_path(post)do%>
-              <div><%= Comment.find_by_id(post).content%></div>
-              <div class="ui fitted divider"></div>
-            <%end%>
+          <% current_user.posts.last_five_posts.each do |post| %>
+            <% unless post.comments.size.zero? %>
+              <%= link_to post_path(post) do %>
+                <div><%= post.comments.last.content %></div>
+                <div class="ui fitted divider"></div>
+              <% end %>
+            <% end %>
           <% end %>
         </div>
         <br>
@@ -58,22 +74,24 @@
           <strong>Friends requests:</strong>
           <br>
           <br>
-          <% current_user.friendships.pending.each do |friend_req|%>
-          <div class="ui equal width form">
-            <div class="fields">
-              <div class="field"><%= friend_req.friend.name %></div>
-              <div class="field"><button class="mini positive ui button field">
-                <%= link_to 'Accept', update_status_path(friend_request: friend_req, status: true), method: :post%>
-              </button></div>
-              <%# current_user.create_friendship(status = true) %>
-              <div class="field"><button class="mini negative ui button field">
-                <%= link_to 'Decline', update_status_path(friend_request: friend_req, status: false), method: :post%>
-              </button></div>
-              <%# user.create_friendship(friend_req.confirmed = false) %>
+          <% @pending_requests.each do |friend_req| %>
+            <div class="ui equal width form">
+              <div class="fields">
+                <div class="field"><%= friend_req.user.name %> <%= friend_req.user.lastname %></div>
+                <div class="field">
+                  <button class="mini positive ui button field">
+                    <%= link_to 'Accept', update_status_path(friend_request: friend_req, status: true), method: :post %>
+                  </button>
+                </div>
+                <div class="field">
+                  <button class="mini negative ui button field">
+                    <%= link_to 'Decline', friendship_path, method: :delete %>
+                  </button>
+                </div>
+              </div>
             </div>
-          </div>
-          <div class="ui fitted divider"></div>
-          <br>
+            <div class="ui fitted divider"></div>
+            <br>
           <% end %>
         </div>
       </div>

@@ -17,10 +17,13 @@ class UsersController < ApplicationController
     @num_friends = @user.friendships.confirmed.count
     @name = "#{@user.name} #{@user.lastname}"
     @email = @user.email
+    @is_a_friend = current_user.friendships.find_by_friend_id(@user)
+    @diff_profile_new_friend = @user != current_user && @is_a_friend.nil?
+    @pending_requests = Friendship.pending_with_friend_id(current_user)
   end
 
   def create_friendship
-    self.confirm_friendship?(friend_request=nil)
+    self.confirm_friendship?(friend_request = nil)
   end
 
 
