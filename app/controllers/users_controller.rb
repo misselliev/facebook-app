@@ -20,6 +20,7 @@ class UsersController < ApplicationController
     @is_a_friend = current_user.friendships.find_by_friend_id(@user)
     @diff_profile_new_friend = @user != current_user && @is_a_friend.nil?
     @pending_requests = Friendship.pending_with_friend_id(current_user)
+    @friends = @user.friendships.confirmed
   end
 
   def create_friendship

@@ -16,9 +16,12 @@ class FriendshipsController < ApplicationController
     else
       flash[:alert] = 'Something went wrong'
     end
+    redirect_to user_path(params[:id])
   end
 
   def update_status
     Friendship.confirm_friendship?(params[:friend_request], params[:status])
+    redirect_to user_path(params[:id])
   end
+
 end
