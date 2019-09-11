@@ -31,7 +31,7 @@ class PostsController < ApplicationController
     @post = Post.find(params[:id])
     if @post.update_attributes(post_params)
       flash[:notice] = 'Post updated'
-      render post_path(params[:id])
+      redirect_to post_path(params[:id])
     else
       render 'edit'
     end
@@ -43,7 +43,7 @@ class PostsController < ApplicationController
     post = current_user.posts.find_by(id: params[:id])
     if post.nil?
       flash[:alert] = "You are not authorized to do this"
-      redirect_to post_path(params[:id])
+      render post_path(params[:id])
     else
       @post
     end
