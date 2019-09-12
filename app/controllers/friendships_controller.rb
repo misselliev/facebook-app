@@ -20,7 +20,7 @@ class FriendshipsController < ApplicationController
   end
 
   def update_status
-    Friendship.confirm_friendship?(params[:friend_request], params[:status])
+    Friendship.confirm_friendship(params[:friend_request], params[:status])
     redirect_to user_path(params[:id])
   end
 

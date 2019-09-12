@@ -5,6 +5,7 @@ class Friendship < ApplicationRecord
   scope :confirmed, -> { where('confirmed = ?', true) }
   scope :pending, -> { where(confirmed: nil) }
   scope :pending_with_friend_id, ->(user) { where(friend_id: user, confirmed: nil) }
+  scope :current_friend, ->(friend) { where(user_id: friend, confirmed: nil) }
 
   def self.get_confirmed(user)
     user.friendships.confirmed
@@ -18,9 +19,9 @@ class Friendship < ApplicationRecord
     user.friendships.pending_with_friend_id
   end
 
-  def self.confirm_friendship?(friend_request, status)
+  def self.confirm_friendship(friend_request, status)
     friend_request = Friendship.find_by_id(friend_request)
-    friend_request.confirmed = status
+    friend_request.update(confirmed: status)
     friend_request.save
     inverted_friendship(friend_request)
   end
