@@ -18,11 +18,6 @@ class UsersController < ApplicationController
     @pending_requests = Friendship.pending_with_friend_id(current_user)
   end
 
-  def create_friendship
-    self.confirm_friendship?(friend_request = nil)
-  end
-
-
   private
 
   def user_params

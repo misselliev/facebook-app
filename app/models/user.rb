@@ -9,7 +9,7 @@ class User < ApplicationRecord
   has_many :comments, dependent: :destroy
   has_many :likes
   has_many :friendships, dependent: :destroy
-  has_many :inverse_friendships, class_name: 'Friendship', foreign_key: 'friend_id'
+  has_many :inverse_friendships, class_name: 'Friendship', foreign_key: 'friend_id', dependent: :destroy
 
   validates :name, presence: :true, length: { minimum: 3, maximum: 50 }
   validates :lastname, presence: :true, length: { minimum: 3, maximum: 50 }
@@ -24,14 +24,4 @@ class User < ApplicationRecord
     email.downcase!
   end
 
-  def self.confirm_friendship?(friend_request = nil)
-    if friend_request 
-      friend_request.confirmed = true
-      user = User.find_by_id(friend_request.friend_id)
-      user.friendships.build(friend_id: friend_request.user_id, confirmed: true).save
-    else
-      user = User.find_by_id(friend_request.friend_id)
-      user.friendships.build(friend_id: friend_request.user_id, confirmed: false).save
-    end
-  end
 end
