@@ -16,9 +16,9 @@
         <%= image_tag('profile.jpg') %>
       </div>
       <div class="content">
-        <div class="header"><%= @name %></div>
+        <div class="header"><%= "#{@user.name} #{@user.lastname}" %></div>
         <div class="meta">
-          <a><%= @email %></a>
+          <a><%= @user.email %></a>
         </div>
         <div class="description">
           Needs to fullfill
@@ -26,11 +26,11 @@
       </div>
       <div class="extra content">
       <span class="right floated">
-        Joined in <%= @joined_at %>
+        Joined in <%= @user.created_at.year %>
       </span>
         <span>
         <i class="user icon"></i>
-          <%= @num_friends %> Friends
+          <%= @user.friendships.confirmed.count %> Friends
       </span>
       </div>
       <% if @diff_profile_new_friend %>
@@ -49,18 +49,20 @@
       <% end %>
     </div>
     <br>
-    <div class = "ui card">
-      <div class="ui middle aligned selection divided list">
-      <% @friends.each do |friend| %>
-        <%=link_to user_path(friend.friend.id), class:"item" do %>
-          <%= image_tag('profile.jpg', class: "ui avatar image") %>
-          <div class="content">
-            <div class="ui header floated right"><%= friend.friend.name %></div>
-          </div>
+    <% if !@user.friendships.confirmed.empty? %>
+      <div class = "ui card">
+        <div class="ui middle aligned selection divided list">
+        <% @user.friendships.confirmed.each do |friend| %>
+          <%=link_to user_path(friend.friend.id), class:"item" do %>
+            <%= image_tag('profile.jpg', class: "ui avatar image") %>
+            <div class="content">
+              <div class="ui header floated right"><%= friend.friend.name %></div>
+            </div>
+          <%end%>
         <%end%>
-      <%end%>
+        </div>
       </div>
-    </div>
+    <%end%>
   <% end %>
 
   <% content_for :right_side do %>
@@ -92,7 +94,7 @@
         <% unless @pending_requests.empty?%>
           <div class="friend_requests">
             <i class="user icon"></i>
-            <strong>Friends requests:</strong>
+            <strong>Friends requests:</strong><%=@pending_requests.count%>
             <br>
             <br>
             <% @pending_requests.each do |friend_req| %>
