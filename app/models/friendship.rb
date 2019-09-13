@@ -1,11 +1,20 @@
 class Friendship < ApplicationRecord
   belongs_to :user
   belongs_to :friend, class_name: 'User'
+  validate :already_requested
+
 
   scope :confirmed, -> { where('confirmed = ?', true) }
   scope :pending, -> { where(confirmed: nil) }
   scope :pending_with_friend_id, ->(user) { where(friend_id: user, confirmed: nil) }
-  scope :current_friend, ->(friend) { where(user_id: friend, confirmed: nil) }
+
+  def already_requested
+    friend_forward_validation = Friendship.where(user_id: friend_id, friend_id: user_id).exists?
+    friend_reverse_validation = Friendship.where(user_id: user_id, friend_id: friend_id).exists?
+    unless friend_forward_validation || friend_reverse_validation 
+      self.errors.add(:user_id, 'Already requested!')
+    end
+  end
 
   def self.get_confirmed(user)
     user.friendships.confirmed

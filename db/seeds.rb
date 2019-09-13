@@ -31,14 +31,14 @@ user3 = User.third
 user4 = User.fourth
 user5 = User.fifth
 
-user1.friendships.build(friend_id: user2.id, confirmed: true).save
+# user1.friendships.build(friend_id: user2.id, confirmed: true).save
 user1.friendships.build(friend_id: user3.id).save
-user1.friendships.build(friend_id: user4.id).save
-user2.friendships.build(friend_id: user3.id, confirmed: true).save
-user2.friendships.build(friend_id: user4.id).save
-user2.friendships.build(friend_id: user5.id).save
-user3.friendships.build(friend_id: user4.id, confirmed: true).save
-user3.friendships.build(friend_id: user5.id).save
+# user1.friendships.build(friend_id: user4.id).save
+# user2.friendships.build(friend_id: user3.id, confirmed: true).save
+# user2.friendships.build(friend_id: user4.id).save
+# user2.friendships.build(friend_id: user5.id).save
+# user3.friendships.build(friend_id: user4.id, confirmed: true).save
+# user3.friendships.build(friend_id: user5.id).save
 
 # Creating comments
 30.times do |_i|
