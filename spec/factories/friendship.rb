@@ -21,7 +21,7 @@ FactoryBot.define do
 
     trait :incomplete do
       user_id {}
-      friend_id{}
+      friend_id {}
     end
   end
 end

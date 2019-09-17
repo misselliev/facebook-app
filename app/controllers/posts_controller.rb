@@ -42,7 +42,7 @@ class PostsController < ApplicationController
   def access_post
     post = current_user.posts.find_by(id: params[:id])
     if post.nil?
-      flash[:alert] = "You are not authorized to do this"
+      flash[:alert] = 'You are not authorized to do this'
       render post_path(params[:id])
     else
       @post

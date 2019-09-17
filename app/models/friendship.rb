@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class Friendship < ApplicationRecord
   belongs_to :user
   belongs_to :friend, class_name: 'User'
@@ -12,24 +14,18 @@ class Friendship < ApplicationRecord
   def already_requested
     combinations = ["user_id = #{user_id} AND friend_id = #{friend_id} AND confirmed IS NULL",
                     "user_id = #{friend_id} AND friend_id = #{user_id} AND confirmed IS NULL"]
-    if Friendship.where(combinations.join(' OR ')).exists?
-      errors.add(:user_id, 'already requested')
-    end
+    errors.add(:user_id, 'already requested') if Friendship.where(combinations.join(' OR ')).exists?
   end
 
   def friendship_true?
     combinations = ["user_id = #{user_id} AND friend_id = #{friend_id} AND confirmed = true",
                     "user_id = #{friend_id} AND friend_id = #{user_id} AND confirmed = true"]
-                    byebug
     if Friendship.where(combinations.join(' OR ')).exists?
-      byebug
       friend_request = Friendship.find(user_id: user_id, friend_id: friend_id) || Friendship.find(user_id: friend_id, friend_id: user_id)
-      byebug
       inverted_friendship(friend_request)
-      byebug
     end
   end
- 
+
   def self.get_confirmed(user)
     user.friendships.confirmed
   end

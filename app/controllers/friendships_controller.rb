@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class FriendshipsController < ApplicationController
   def create
     @friendship = current_user.friendships.build(friend_id: params[:friend_id])
@@ -23,5 +25,4 @@ class FriendshipsController < ApplicationController
     Friendship.confirm_friendship(params[:friend_request], params[:status])
     redirect_to user_path(params[:id])
   end
-
 end

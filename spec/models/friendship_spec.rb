@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'rails_helper'
 
 RSpec.describe Friendship, type: :model do
@@ -7,7 +9,7 @@ RSpec.describe Friendship, type: :model do
   let(:incomplete_friendship) { FactoryBot.build(:friendship, :incomplete) }
 
   describe 'basic validations for friendship model' do
-    context "validates presences" do
+    context 'validates presences' do
       it { should validate_presence_of(:user_id) }
       it { should validate_presence_of(:friend_id) }
     end
@@ -27,7 +29,6 @@ RSpec.describe Friendship, type: :model do
     it 'is has a valid friend_id' do
       should allow_value(valid_friendship.friend_id).for(:friend_id)
     end
-
   end
 
   describe 'validating correct associations' do
@@ -52,6 +53,5 @@ RSpec.describe Friendship, type: :model do
     it 'should return rejected friendship when confirmed is false' do
       should allow_value(rejected_friendship.confirmed).for(:confirmed)
     end
-
   end
 end

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class LikesController < ApplicationController
   before_action :authorized?
   def create
@@ -22,11 +24,11 @@ class LikesController < ApplicationController
 
   def redirecting_data(param, user = nil)
     if param
-      redirect_to posts_index_path if params[:from] === 'index'
-      redirect_to post_path if params[:from] === 'show'
-      redirect_to user_path(user) if params[:from] === 'user'
+      redirect_to posts_index_path if params[:from] == 'index'
+      redirect_to post_path if params[:from] == 'show'
+      redirect_to user_path(user) if params[:from] == 'user'
     else
-      flash[:alert] = "Something went wrong"
+      flash[:alert] = 'Something went wrong'
     end
   end
 
