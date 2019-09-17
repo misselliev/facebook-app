@@ -33,7 +33,6 @@ class Friendship < ApplicationRecord
     friend_request.save
     inverted_friendship(friend_request)
   end
-  
 
   def self.inverted_friendship(friend_request)
     user = User.find_by_id(friend_request.friend_id)
