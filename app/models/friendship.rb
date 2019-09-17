@@ -6,7 +6,6 @@ class Friendship < ApplicationRecord
   validate :already_requested, on: :create
   validate :friendship_true?, on: :confirm_friendship
 
-
   scope :confirmed, -> { where('confirmed = ?', true) }
   scope :pending, -> { where(confirmed: nil) }
   scope :pending_with_friend_id, ->(user) { where(friend_id: user, confirmed: nil) }
@@ -20,10 +19,13 @@ class Friendship < ApplicationRecord
   def friendship_true?
     combinations = ["user_id = #{user_id} AND friend_id = #{friend_id} AND confirmed = true",
                     "user_id = #{friend_id} AND friend_id = #{user_id} AND confirmed = true"]
-    if Friendship.where(combinations.join(' OR ')).exists?
-      friend_request = Friendship.find(user_id: user_id, friend_id: friend_id) || Friendship.find(user_id: friend_id, friend_id: user_id)
-      inverted_friendship(friend_request)
-    end
+
+    find_friend = proc { |user_id, friend_id| Friendship.find(user_id: user_id, friend_id: friend_id) }
+
+    return unless Friendship.where(combinations.join(' OR ')).exists?
+
+    friend_request = find_friend.call(user_id, friend_id) || find_friend.call(friend_id, user_id)
+    inverted_friendship(friend_request)
   end
 
   def self.get_confirmed(user)
