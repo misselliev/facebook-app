@@ -107,7 +107,7 @@
                   <div class="field"><%= friend_req.user.name %> <%= friend_req.user.lastname %></div>
                   <div class="field">
                     <button class="mini positive ui button field">
-                      <%= link_to 'Accept', update_status_path(friend_request: friend_req, status: true), method: :post %>
+                      <%= link_to 'Accept', update_status_path(friend_request: friend_req), method: :post %>
                     </button>
                   </div>
                   <div class="field">

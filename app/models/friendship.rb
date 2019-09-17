@@ -38,9 +38,9 @@ class Friendship < ApplicationRecord
     user.friendships.pending_with_friend_id
   end
 
-  def self.confirm_friendship(friend_request, status)
+  def self.confirm_friendship(friend_request)
     friend_request = Friendship.find_by_id(friend_request)
-    friend_request.update(confirmed: status) unless friend_request.confirmed = true
+    friend_request.update(confirmed: true)
     friend_request.save
     inverted_friendship(friend_request)
   end
