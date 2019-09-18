@@ -10,6 +10,8 @@ class User < ApplicationRecord
   has_many :likes
   has_many :friendships, dependent: :destroy
   has_many :inverse_friendships, class_name: 'Friendship', foreign_key: 'friend_id', dependent: :destroy
+  has_many :confirmed, -> { where(confirmed: true) }, class_name: 'Friendship'
+  has_many :friends, through: :confirmed
 
   validates :name, presence: true, length: { minimum: 3, maximum: 50 }
   validates :lastname, presence: true, length: { minimum: 3, maximum: 50 }
@@ -22,5 +24,9 @@ class User < ApplicationRecord
 
   def downcase_email
     email.downcase!
+  end
+
+  def news_feed
+    Post.where(author: self.friends + [self]).recent_posts
   end
 end
