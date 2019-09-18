@@ -9,6 +9,8 @@ class Friendship < ApplicationRecord
   scope :confirmed, -> { where('confirmed = ?', true) }
   scope :pending, -> { where(confirmed: nil) }
   scope :pending_with_friend_id, ->(user) { where(friend_id: user, confirmed: nil) }
+  scope :is_my_friend?, ->(friend) { where(friend_id: friend, confirmed: true) }
+  scope :is_a_pending, ->(friend) { where(friend: friend, confirmed: nil) }
 
   def already_requested
     combinations = ["user_id = #{user_id} AND friend_id = #{friend_id} AND confirmed IS NULL",
