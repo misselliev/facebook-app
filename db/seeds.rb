@@ -27,9 +27,18 @@ end
 # Creating friendships
 user1 = User.first
 user2 = User.second
+user3 = User.third
+user4 = User.fourth
+user5 = User.fifth
 
-user1.friendships.build(friend: user2).save
-
+f = Friendship.create(user: user1, friend: user2)
+Friendship.confirm_friendship(f)                  # Confirmed
+f = Friendship.create(user: user1, friend: user3)
+Friendship.confirm_friendship(f)                  # Confirmed
+f = Friendship.create(user: user1, friend: user4) # Pending
+f = Friendship.create(user: user1, friend: user5) # Pending
+f = Friendship.create(user: user4, friend: user2) # Pending
+f = Friendship.create(user: user5, friend: user2) # Pending
 
 # Creating comments
 30.times do |_i|
