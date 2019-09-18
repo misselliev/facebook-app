@@ -8,6 +8,6 @@ class Comment < ApplicationRecord
   validates :commenter_id, presence: :true
   validates :post_id, presence: :true
   
-  scope :recent_comments, -> { where('created_at < ?',  Time.current).order(created_at: :ASC) }
+  scope :recent_comments, -> { where('created_at < ?', Time.current).order(created_at: :ASC) }
 
 end

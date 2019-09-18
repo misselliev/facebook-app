@@ -1,9 +1,10 @@
 Rails.application.routes.draw do
+  get 'friendships/create'
   root 'pages#home'
 
   devise_for :users, :controllers => { registrations: 'registrations' }
   
-  resources :users, only: %i[new create index]
+  resources :users, only: %i[new create index show]
   get 'users_index', to: 'users#index'
   
   resources :posts, only: %i[new create index show edit update]
@@ -15,4 +16,6 @@ Rails.application.routes.draw do
   get 'comments/new'
   match '/comments/create/:id', to: 'comments#create', via: :post, as: :create_comment
 
+  resources :friendships, only: %i[create destroy]
+  match '/friendships/update_status/:id', to: 'friendships#update_status', via: :post, as: :update_status
 end

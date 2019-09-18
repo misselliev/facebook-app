@@ -1,9 +1,9 @@
 <%if liked?(locals[:post])%>
-  <%= link_to create_like_path(locals[:post], from: locals[:from]), method: :post do %>
+  <%= link_to create_like_path(locals[:post], from: locals[:from], user: locals[:user]), method: :post do %>
     <i class="heart grey like icon"></i>
   <% end %>
 <%else%>
-  <%= link_to destroy_like_path(locals[:post], from: locals[:from]), method: :delete do %>
+  <%= link_to destroy_like_path(locals[:post], from: locals[:from], user: locals[:user]), method: :delete do %>
     <i class="heart teal like icon"></i>
   <% end %>
 <%end%>
