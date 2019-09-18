@@ -13,9 +13,11 @@ class UsersController < ApplicationController
 
   def show
     @user = User.find_by_id(params[:id])
-    @is_a_friend = current_user.friendships.find_by_friend_id(@user)
-    @diff_profile_new_friend = @user != current_user && @is_a_friend.nil?
-    @pending_requests = Friendship.pending_with_friend_id(current_user)
+    @is_pending = current_user.friendships.is_a_pending(@user).exists?
+    @is_incoming = @user.friendships.is_a_pending(current_user).exists?
+    @same_profile = @user == current_user
+    @already_friends = current_user.friendships.is_my_friend?(@user).exists?
+    @pending_requests = current_user.inverted_pending
   end
 
   private
@@ -23,5 +25,4 @@ class UsersController < ApplicationController
   def user_params
     params.require(:user).permit(:name, :lastname, :email, :password)
   end
-
 end

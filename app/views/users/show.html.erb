@@ -33,57 +33,65 @@
           <%= @user.friendships.confirmed.count %> Friends
       </span>
       </div>
-      <% if @diff_profile_new_friend %>
+      <% if @is_pending %>
+        <div class="extra content">
+          <div class="right floated">
+            <p class="meta">Friend request sent</p>
+          </div>
+        </div>
+      <% elsif @is_incoming %>
+        <div class="extra content">
+          <div class="right floated">
+            <p class="meta"><%= @user.name %> sent you a friend request</p>
+          </div>
+        </div>
+      <% elsif @same_profile || @already_friends %>
+        <div></div>
+      <% else %>
         <%= link_to friendships_create_path(friend_id: @user) do %>
           <div class="ui bottom attached button">
             <i class="add icon"></i>
             Add Friend
           </div>
         <% end %>
-      <% elsif !@is_a_friend.nil? && @is_a_friend.confirmed != true %>
-        <div class="extra content">
-          <div class="right floated">
-            <p class="meta">Friend request sent</p>
-          </div>
-        </div>
       <% end %>
     </div>
     <br>
-    <% if !@user.friendships.confirmed.empty? %>
-      <div class = "ui card">
+    <% if !@user.friends.empty? %>
+      <div class="ui card">
         <div class="ui middle aligned selection divided list">
-        <% @user.friendships.confirmed.each do |friend| %>
-          <%=link_to user_path(friend.friend.id), class:"item" do %>
-            <%= image_tag('profile.jpg', class: "ui avatar image") %>
-            <div class="content">
-              <div class="ui header floated right"><%= friend.friend.name %></div>
-            </div>
-          <%end%>
-        <%end%>
+          <% @user.friends.each do |friend| %>
+            <%= link_to user_path(friend.id), class: "item" do %>
+              <%= image_tag('profile.jpg', class: "ui avatar image") %>
+              <div class="content">
+                <div class="ui header floated right"><%= friend.name %></div>
+              </div>
+            <% end %>
+          <% end %>
         </div>
       </div>
-    <%end%>
+    <% end %>
   <% end %>
 
   <% content_for :right_side do %>
     <div class="ui card">
       <div class="content">
-      <%= link_to user_path(current_user) do %>
-        <h3 class="ui header" style="
-    margin-top: 0px">
-          <i class="bell outline icon floated right"></i>
-          <div class="content">Welcome <%= current_user.name %>!</div>
-        </h3>
-      <%end%>
-      <br>
+        <%= link_to user_path(current_user) do %>
+          <h3 class="ui header" style="
+          margin-top: 0px">
+            <i class="bell outline icon floated right"></i>
+            <div class="content">Welcome <%= current_user.name %>!</div>
+          </h3>
+        <% end %>
+        <br>
         <div class="comments">
           <i class="comment icon"></i>
           <strong>Recents comments on your posts:</strong>
           <br>
           <br>
-          <% if current_user.posts.empty?%>
+          <% if current_user.posts.empty? %>
             <div class="ui center aligned">No recent comments</div>
-          <%else%>
+          <% else %>
             <% current_user.posts.last_five_posts.each do |post| %>
               <% unless post.comments.size.zero? %>
                 <%= link_to post_path(post) do %>
@@ -92,39 +100,40 @@
                 <% end %>
               <% end %>
             <% end %>
-          <%end%>
+          <% end %>
         </div>
         <br>
-        <% unless @pending_requests.empty?%>
+        <% unless @pending_requests.empty? %>
           <div class="friend_requests">
             <i class="user icon"></i>
-            <strong>Friends requests: </strong><%=@pending_requests.count%>
+            <strong>Friends requests: </strong><%= @pending_requests.count %>
             <br>
             <br>
             <% @pending_requests.each do |friend_req| %>
               <div class="ui equal width form">
-                <div class="fields">
-                  <div class="field"><%= friend_req.user.name %> <%= friend_req.user.lastname %></div>
-                  <div class="field">
-                    <button class="mini positive ui button field">
-                      <%= link_to 'Accept', update_status_path(friend_request: friend_req), method: :post %>
-                    </button>
-                  </div>
-                  <div class="field">
-                    <button class="mini negative ui button field">
-                      <%= link_to 'Decline', friendship_path, method: :delete %>
-                    </button>
+                <div class="ui equal width form">
+                  <div class="fields">
+                    <div class="field"><%= friend_req.user.name %> <%= friend_req.user.lastname %></div>
+                    <div class="field">
+                      <button class="mini positive ui button field">
+                        <%= link_to 'Accept', update_status_path(friend_request: friend_req), method: :post %>
+                      </button>
+                    </div>
+                    <div class="field">
+                      <button class="mini negative ui button field">
+                        <%= link_to 'Decline', friendship_path, method: :delete %>
+                      </button>
+                    </div>
                   </div>
                 </div>
-              </div>
-              <div class="ui fitted divider"></div>
-              <br>
+                <div class="ui fitted divider"></div>
+                <br>
             <% end %>
-          </div>
-        <%end%>
+            </div>
+        <% end %>
+        </div>
       </div>
-    </div>
   <% end %>
 
-</div>
+  </div>
 
