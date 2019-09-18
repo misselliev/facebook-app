@@ -14,7 +14,7 @@ class PostsController < ApplicationController
   end
 
   def index
-    @posts = Post.all.recent_posts
+    @posts = current_user.news_feed
   end
 
   def show
