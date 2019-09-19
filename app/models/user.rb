@@ -14,8 +14,10 @@ class User < ApplicationRecord
   has_many :confirmed, -> { where(confirmed: true) }, class_name: 'Friendship'
   has_many :friends, through: :confirmed
 
-  has_many :pending_friendships, ->(user) { where(confirmed: nil, user: user) }, class_name: 'Friendship', foreign_key: 'user_id'
-  has_many :inverted_pending, ->(user) { where(confirmed: nil, friend: user) }, class_name: 'Friendship', foreign_key: 'friend_id'
+  has_many :pending_friendships, ->(user) { where(confirmed: nil, user: user) },
+  class_name: 'Friendship', foreign_key: 'user_id'
+  has_many :inverted_pending, ->(user) { where(confirmed: nil, friend: user) },
+  class_name: 'Friendship', foreign_key: 'friend_id'
 
   validates :name, presence: true, length: { minimum: 3, maximum: 50 }
   validates :lastname, presence: true, length: { minimum: 3, maximum: 50 }
@@ -31,6 +33,6 @@ class User < ApplicationRecord
   end
 
   def news_feed
-    Post.where(author: self.friends + [self]).recent_posts
+    Post.where(author: friends + [self]).recent_posts
   end
 end
