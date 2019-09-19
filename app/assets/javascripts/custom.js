@@ -16,3 +16,10 @@ $(document).on('turbolinks:load', function() {
   );
   $(".accordion-content").css("display", "none");
 });
+
+$(document).on('turbolinks:load', function() {
+  $('#accept_friendship,#decline_friendship').on('click', function() {
+      $(this).prop('disabled', true);
+  });
+});
+
