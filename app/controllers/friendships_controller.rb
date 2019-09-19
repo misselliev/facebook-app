@@ -5,11 +5,10 @@ class FriendshipsController < ApplicationController
     @friendship = current_user.friendships.build(friend_id: params[:friend_id])
     if @friendship.save
       flash[:notice] = 'Request sent'
-      redirect_to user_path(params[:friend_id])
     else
       flash[:alert] = 'Something went wrong'
-      redirect_to user_path(params[:friend_id])
     end
+    redirect_to user_path(params[:friend_id])
   end
 
   def destroy
