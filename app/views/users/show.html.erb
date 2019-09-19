@@ -115,13 +115,13 @@
                   <div class="fields">
                     <div class="field"><%= friend_req.user.name %> <%= friend_req.user.lastname %></div>
                     <div class="field">
-                      <button class="mini positive ui button field">
+                      <button class="mini positive ui button field" id="accept_friendship">
                         <%= link_to 'Accept', update_status_path(friend_request: friend_req), method: :post %>
                       </button>
                     </div>
                     <div class="field">
-                      <button class="mini negative ui button field">
-                        <%= link_to 'Decline', friendship_path, method: :delete %>
+                      <button class="mini negative ui button field" id="decline_friendship">
+                        <%= link_to 'Decline', friendship_path(id: friend_req, friend_id: friend_req.user), method: :delete %>
                       </button>
                     </div>
                   </div>
