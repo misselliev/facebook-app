@@ -5,7 +5,7 @@ Rails.application.routes.draw do
   root :to => 'pages#home'
   get 'friendships/create'
 
-  devise_for :users, :controllers => { registrations: 'registrations' }
+  devise_for :users, :controllers => { registrations: 'registrations', :omniauth_callbacks => "users/omniauth_callbacks" }
   
   resources :users, only: %i[new create index show]
   get 'users_index', to: 'users#index'
