@@ -1,6 +1,9 @@
 Rails.application.routes.draw do
+  authenticated :user do
+    root :to => 'posts#index', as: :authenticated_root
+  end
+  root :to => 'pages#home'
   get 'friendships/create'
-  root 'pages#home'
 
   devise_for :users, :controllers => { registrations: 'registrations' }
   
