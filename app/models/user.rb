@@ -4,7 +4,7 @@ class User < ApplicationRecord
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
   devise :database_authenticatable, :registerable,
-         :recoverable, :rememberable, :validatable
+         :recoverable, :rememberable, :validatable, :omniauthable, omniauth_providers: [:facebook]
   has_many :posts, foreign_key: :author_id
   has_many :comments, dependent: :destroy
   has_many :likes
@@ -28,7 +28,7 @@ class User < ApplicationRecord
 
   before_save :downcase_email
 
-  devise :omniauthable, :omniauth_providers => [:facebook]
+  # devise :omniauthable, :omniauth_providers => [:facebook]
 
   def downcase_email
     email.downcase!
@@ -38,12 +38,12 @@ class User < ApplicationRecord
     Post.where(author: friends + [self]).recent_posts
   end
 
-  private
+  # private
 
   def self.new_with_session(params, session)
     super.tap do |user|
-      if (data = session["devise.facebook_data"] && session["devise.facebook_data"]["extra"]["raw_info"])
-        user.email = data["email"] if user.email.blank?
+      if (data = session['devise.facebook_data'] && session['devise.facebook_data']['extra']['raw_info'])
+        user.email = data['email'] if user.email.blank?
       end
     end
   end
@@ -52,7 +52,7 @@ class User < ApplicationRecord
     where(provider: auth.provider, uid: auth.uid).first_or_create do |user|
       user.email = auth.info.email
       user.password = Devise.friendly_token[0, 20]
-      user.name = auth.info.name   # assuming the user model has a name
+      user.name = auth.info.name # assuming the user model has a name
       user.image = auth.info.image # assuming the user model has an image
     end
   end
