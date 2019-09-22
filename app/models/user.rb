@@ -28,8 +28,6 @@ class User < ApplicationRecord
 
   before_save :downcase_email
 
-  # devise :omniauthable, :omniauth_providers => [:facebook]
-
   def downcase_email
     email.downcase!
   end
