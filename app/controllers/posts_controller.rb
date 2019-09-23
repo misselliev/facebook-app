@@ -19,8 +19,13 @@ class PostsController < ApplicationController
 
   def show
     @post = Post.find(params[:id])
-    @comment = Comment.new
-    @index_comments = @post.comments.all.recent_comments
+    if current_user.friends.include? @post.author
+      @comment = Comment.new
+      @index_comments = @post.comments.all.recent_comments
+    else
+      flash[:alert] = 'This post is inaccessible from your user.'
+      redirect_to posts_path
+    end
   end
 
   def edit
@@ -47,6 +52,10 @@ class PostsController < ApplicationController
     else
       @post
     end
+  end
+
+  def authorized_viewer(user)
+    current_user.friends.include?(user)
   end
 
   def post_params
