@@ -27,3 +27,4 @@
 /config/master.key
 .idea/*
 Gemfile.lock
+/config/local_env.yml
