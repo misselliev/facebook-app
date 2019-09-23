@@ -35,7 +35,6 @@ gem 'omniauth-facebook'
 gem 'semantic-ui-sass'
 gem 'jquery-rails', '~> 4.3', '>= 4.3.3'
 gem 'rails-ujs', '~> 0.1.0'
-gem 'omniauth-facebook'
 # Use ActiveStorage variant
 # gem 'mini_magick', '~> 4.8'
 
