@@ -10,6 +10,8 @@
 </head>
 
 <body>
+<div id="fb-root"></div>
+<script async defer crossorigin="anonymous" src="https://connect.facebook.net/es_LA/sdk.js#xfbml=1&version=v4.0&appId=1343982042444839&autoLogAppEvents=1"></script>
 <div class="ui teal inverted small menu attached">
   <div class="ui container">
     <%= render 'shared/navigation' %>
@@ -36,15 +38,10 @@
   </div>
   <div class="eight wide column">
     <%= yield %>
-    <% unless current_user %>
-      <%= link_to "Sign in or Sign up with Facebook", user_facebook_omniauth_authorize_path %>
-    <% else %>
-      <%= current_user[:name] %>
-      <%= link_to "Logout", destroy_user_session_path, method: :delete %>
-    <% end %>
   </div>
   <div class="four wide column">
     <%= yield(:right_side) %>
+
   </div>
 </div>
 </body>

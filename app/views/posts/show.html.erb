@@ -12,9 +12,9 @@
       <div class="ui horizontal list">
         <div class="item">
           <% if @post.author.image.nil? %>
-            <%= image_tag('profile.jpg', class: "ui avatar image") %>
+            <%= image_tag('profile.jpg', class: "ui avatar image", alt: "profile-image") %>
           <% else %>
-            <%= image_tag(@post.author.image, class: "ui avatar image") %>
+            <%= image_tag(@post.author.image, class: "ui avatar image", alt: "profile-image") %>
           <% end %>
           <div class="content">
             <%= link_to user_path(@post.author.id) do %>
@@ -65,9 +65,9 @@
                 <div class="ui horizontal list">
                   <div class="item">
                     <% if comm.commenter.image.nil? %>
-                      <%= image_tag('profile.jpg', class: "ui avatar image") %>
+                      <%= image_tag('profile.jpg', class: "ui avatar image", alt: "profile-image") %>
                     <% else %>
-                      <%= image_tag(comm.commenter.image, class: "ui avatar image") %>
+                      <%= image_tag(comm.commenter.image, class: "ui avatar image", alt: "profile-image") %>
                     <% end %>
                     <div class="content">
                       <%= link_to user_path(comm.commenter.id) do %>

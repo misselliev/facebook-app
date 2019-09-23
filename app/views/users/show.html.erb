@@ -14,9 +14,9 @@
     <div class="ui card">
       <div class="image">
         <% if @user.image.nil? %>
-          <%= image_tag('profile.jpg') %>
+          <%= image_tag('profile.jpg', alt: "profile-image") %>
         <% else %>
-          <%= image_tag(@user.image) %>
+          <%= image_tag(@user.image, alt: "profile-image") %>
         <% end %>
       </div>
       <div class="content">
