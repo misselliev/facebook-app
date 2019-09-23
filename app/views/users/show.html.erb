@@ -69,9 +69,9 @@
           <% @user.friends.each do |friend| %>
             <%= link_to user_path(friend.id), class: "item" do %>
               <% if friend.image.nil? %>
-                <%= image_tag('profile.jpg', class: "ui avatar image") %>
+                <%= image_tag('profile.jpg', class: "ui avatar image", alt: "profile-image") %>
               <% else %>
-                <%= image_tag(friend.image, class: "ui avatar image") %>
+                <%= image_tag(friend.image, class: "ui avatar image", alt: "profile-image") %>
               <% end %>
               <div class="content">
                 <div class="ui header floated right"><%= friend.name %></div>
