@@ -11,7 +11,11 @@
     <div class="ui segment">
       <div class="ui horizontal list">
         <div class="item">
-          <%= image_tag('profile.jpg', class: "ui avatar image") %>
+          <% if @post.author.image.nil? %>
+            <%= image_tag('profile.jpg', class: "ui avatar image") %>
+          <% else %>
+            <%= image_tag(@post.author.image, class: "ui avatar image") %>
+          <% end %>
           <div class="content">
             <%= link_to user_path(@post.author.id) do %>
               <div class="ui sub header"><%= "#{@post.author.name} #{@post.author.lastname}" %></div>
@@ -60,7 +64,11 @@
               <div class="four wide column">
                 <div class="ui horizontal list">
                   <div class="item">
-                    <%= image_tag('profile.jpg', class: "ui avatar image") %>
+                    <% if comm.commenter.image.nil? %>
+                      <%= image_tag('profile.jpg', class: "ui avatar image") %>
+                    <% else %>
+                      <%= image_tag(comm.commenter.image, class: "ui avatar image") %>
+                    <% end %>
                     <div class="content">
                       <%= link_to user_path(comm.commenter.id) do %>
                         <div class="ui sub header"><%= "#{comm.commenter.name} #{comm.commenter.lastname}" %></div>

@@ -2,7 +2,11 @@
   <div class="ui segment">
     <div class="ui horizontal list">
       <div class="item">
-        <%= image_tag('profile.jpg', class: "ui avatar image") %>
+        <% if locals[:object].author.image.nil? %>
+          <%= image_tag('profile.jpg', class: "ui avatar image") %>
+        <% else %>
+          <%= image_tag(locals[:object].author.image, class: "ui avatar image") %>
+        <% end %>
         <div class="content">
           <%= link_to user_path(locals[:object].author) do %>
             <div class="ui sub header"><%= "#{locals[:object].author.name} #{locals[:object].author.lastname}" %></div>

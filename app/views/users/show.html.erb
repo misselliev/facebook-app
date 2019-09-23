@@ -13,7 +13,11 @@
   <% content_for :left_side do %>
     <div class="ui card">
       <div class="image">
-        <%= image_tag('profile.jpg') %>
+        <% if @user.image.nil? %>
+          <%= image_tag('profile.jpg') %>
+        <% else %>
+          <%= image_tag(@user.image) %>
+        <% end %>
       </div>
       <div class="content">
         <div class="header"><%= "#{@user.name} #{@user.lastname}" %></div>
@@ -62,7 +66,11 @@
         <div class="ui middle aligned selection divided list">
           <% @user.friends.each do |friend| %>
             <%= link_to user_path(friend.id), class: "item" do %>
-              <%= image_tag('profile.jpg', class: "ui avatar image") %>
+              <% if friend.image.nil? %>
+                <%= image_tag('profile.jpg', class: "ui avatar image") %>
+              <% else %>
+                <%= image_tag(friend.image, class: "ui avatar image") %>
+              <% end %>
               <div class="content">
                 <div class="ui header floated right"><%= friend.name %></div>
               </div>
