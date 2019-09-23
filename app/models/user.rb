@@ -21,7 +21,7 @@ class User < ApplicationRecord
 
   validates :name, presence: true, length: { minimum: 3, maximum: 50 }
   validates :lastname, presence: true, length: { minimum: 3, maximum: 50 }
-  validates :password, presence: true, length: { minimum: 6, maximum: 15 }
+  validates :password, presence: true, length: { minimum: 6, maximum: 30 }
   VALID_EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i.freeze
   validates :email, presence: true, length: { maximum: 255 },
                     format: { with: VALID_EMAIL_REGEX }, uniqueness: { case_sensitive: false }
@@ -42,8 +42,8 @@ class User < ApplicationRecord
 
   def self.new_with_session(params, session)
     super.tap do |user|
-      if (data = session["devise.facebook_data"] && session["devise.facebook_data"]["extra"]["raw_info"])
-        user.email = data["email"] if user.email.blank?
+      if (data = session['devise.facebook_data'] && session['devise.facebook_data']['extra']['raw_info'])
+        user.email = data['email'] if user.email.blank?
       end
     end
   end
@@ -52,8 +52,10 @@ class User < ApplicationRecord
     where(provider: auth.provider, uid: auth.uid).first_or_create do |user|
       user.email = auth.info.email
       user.password = Devise.friendly_token[0, 20]
-      user.name = auth.info.name   # assuming the user model has a name
-      user.image = auth.info.image # assuming the user model has an image
+      user.name = auth.info.name
+      user.lastname = auth.info.name.split(' ')[1]
+      user.image = auth.info.image
+      user.save!
     end
   end
 end
