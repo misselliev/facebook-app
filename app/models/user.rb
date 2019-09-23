@@ -4,10 +4,10 @@ class User < ApplicationRecord
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
   devise :database_authenticatable, :registerable,
-         :recoverable, :rememberable, :validatable
-  has_many :posts, foreign_key: :author_id
+         :recoverable, :rememberable, :validatable, :omniauthable, omniauth_providers: [:facebook]
+  has_many :posts, foreign_key: :author_id, dependent: :destroy
   has_many :comments, dependent: :destroy
-  has_many :likes
+  has_many :likes, dependent: :destroy
   has_many :friendships, dependent: :destroy
   has_many :inverse_friendships, class_name: 'Friendship', foreign_key: 'friend_id', dependent: :destroy
 
@@ -28,8 +28,6 @@ class User < ApplicationRecord
 
   before_save :downcase_email
 
-  devise :omniauthable, :omniauth_providers => [:facebook]
-
   def downcase_email
     email.downcase!
   end
@@ -37,8 +35,6 @@ class User < ApplicationRecord
   def news_feed
     Post.where(author: friends + [self]).recent_posts
   end
-
-  private
 
   def self.new_with_session(params, session)
     super.tap do |user|
@@ -54,7 +50,6 @@ class User < ApplicationRecord
       user.password = Devise.friendly_token[0, 20]
       user.name = auth.info.name.split(' ')[1]
       user.lastname = auth.info.name.split[1..-1].join(' ')
-
       user.image = auth.info.image
       user.save!
     end
