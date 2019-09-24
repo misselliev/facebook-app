@@ -1,0 +1,10 @@
+<a class="item" style="padding: 0px">
+  <%= link_to posts_path do %>
+    <div class="logo"></div>
+  <% end %>
+</a>
+<% if current_user.nil?%>
+  <%= render 'shared/signin_form' %>
+<%else%>
+  <%= render 'shared/signout_nav'%>
+<%end%>

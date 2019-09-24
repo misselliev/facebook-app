@@ -1,0 +1,16 @@
+<div class="ui container">
+  <h2 class="ui center aligned header">
+    Post Index
+    <i class="ui envelope open outline icon"></i>
+  </h2>
+</div>
+<br>
+<div class="centered aligned">
+  <% @posts.each do |post| %>
+    <%= render 'shared/display_post', locals: { object: post, from: 'index'} %>
+  <% end %>
+  <br>
+  <br>
+  <%= render 'shared/columns' %>
+  <br>
+</div>

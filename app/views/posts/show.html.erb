@@ -1,0 +1,96 @@
+<div class="ui">
+  <br/>
+  <div class="ui container">
+    <h2 class="ui center aligned header">
+      Post
+      <i class="ui envelope open outline icon"></i>
+    </h2>
+
+  </div>
+  <div class="ui segments">
+    <div class="ui segment">
+      <div class="ui horizontal list">
+        <div class="item">
+          <% if @post.author.image.nil? %>
+            <%= image_tag('profile.jpg', class: "ui avatar image", alt: "profile-image") %>
+          <% else %>
+            <%= image_tag(@post.author.image, class: "ui avatar image", alt: "profile-image") %>
+          <% end %>
+          <div class="content">
+            <%= link_to user_path(@post.author.id) do %>
+              <div class="ui sub header"><%= "#{@post.author.name} #{@post.author.lastname}" %></div>
+            <% end %>
+            <small style="color: grey"><%= time_ago_in_words(@post.created_at, include_seconds: true).gsub('about', '') %></small>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="ui segment">
+      <div class="content">
+        <%= @post.content %>
+        <% if post_owner?(@post) %>
+          <%= link_to edit_post_path(@post) do %>
+            <div class="ui bottom right attached mini label">EDIT</div>
+          <% end %>
+        <% end %>
+      </div>
+    </div>
+    <div class="ui segment card">
+      <div class="content">
+        <span class="left floated">
+          <%= render 'shared/check_likes', locals: {post: @post, from: 'show'} %>
+
+          <small class="meta"> <%= "  #{@post.likes.count} likes" %></small>
+        </span>
+        <span class="right floated">
+          <i class="comment teal outline icon"></i>
+          <small class="meta right floated"><%= @post.comments.count %> comments</small>
+        </span>
+      </div>
+    </div>
+    <div class="ui segment">
+      <%= render 'shared/comment_form' %>
+    </div>
+    <div class="ui accordion">
+      <div class="ui title trigger attached button" tabindex="0">
+        <i class="icon dropdown"></i>
+        Comments
+      </div>
+      <div class="ui accordion-content">
+        <br/>
+        <% @index_comments.each do |comm| %>
+          <div class="ui segment">
+            <div class="ui grid">
+              <div class="four wide column">
+                <div class="ui horizontal list">
+                  <div class="item">
+                    <% if comm.commenter.image.nil? %>
+                      <%= image_tag('profile.jpg', class: "ui avatar image", alt: "profile-image") %>
+                    <% else %>
+                      <%= image_tag(comm.commenter.image, class: "ui avatar image", alt: "profile-image") %>
+                    <% end %>
+                    <div class="content">
+                      <%= link_to user_path(comm.commenter.id) do %>
+                        <div class="ui sub header"><%= "#{comm.commenter.name} #{comm.commenter.lastname}" %></div>
+                      <% end %>
+                      <small style="color: grey"><%= time_ago_in_words(comm.created_at, include_seconds: true).gsub('about', '') %></small>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="twelve wide column">
+                <div class="content">
+                  <%= comm.content %>
+                </div>
+              </div>
+            </div>
+          </div>
+        <% end %>
+      </div>
+    </div>
+  </div>
+  <%= render 'shared/columns' %>
+</div>
+
+
+

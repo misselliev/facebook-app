@@ -1,0 +1,26 @@
+<div class="ui container">
+  <h2 class="ui center aligned header">
+      Users Index 
+      <i class="ui envelope open outline icon"></i>
+  </h2>
+</div>
+<br>
+<div class="centered aligned">
+<% @users.each do |user|%>
+  <div class="ui raised segment">
+    <div class="content">
+    <%= link_to user_path(user) do %>
+      <div class="header"><%=user.name%> <%=user.lastname%></div>
+    <%end%>
+      <small style="color: grey"><%=user.email%></small>
+      <br>
+      <% if !current_user.friends.include?(user) && user != current_user && current_user.pending_friendships.find_by(friend: user).nil? && current_user.inverted_pending.find_by(user: user).nil? %>
+        <%= link_to friendships_create_path(friend_id: user) do %>
+          <button class="mini ui button">Add friend</button>
+        <% end %>
+      <% end %>
+    </div>
+  </div>
+<%end%>
+<%= render 'shared/columns'%>
+</div>

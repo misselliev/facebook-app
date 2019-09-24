@@ -1,15 +1,46 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <title>FacebookApp</title>
-    <%= csrf_meta_tags %>
-    <%= csp_meta_tag %>
+<head>
+  <title>Fakebook</title>
+  <%= csrf_meta_tags %>
+  <%= csp_meta_tag %>
 
-    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
-    <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
-  </head>
+  <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+  <%= javascript_include_tag 'application' %>
+</head>
 
-  <body>
+<body>
+<div class="ui teal inverted small menu attached">
+  <div class="ui container">
+    <%= render 'shared/navigation' %>
+  </div>
+</div>
+<div class="ui">
+  <% if notice %>
+    <div class="ui positive message attached">
+      <%= notice %>
+    </div>
+  <% end %>
+  <% if alert %>
+    <div class="ui negative message attached">
+      <%= alert %>
+    </div>
+  <% end %>
+</div>
+<br/>
+<div class="ui container"><%= yield(:landing) %></div>
+<div class="ui grid">
+  <div class="four wide column">
+
+    <%= yield(:left_side) %>
+  </div>
+  <div class="eight wide column">
     <%= yield %>
-  </body>
+  </div>
+  <div class="four wide column">
+    <%= yield(:right_side) %>
+
+  </div>
+</div>
+</body>
 </html>
