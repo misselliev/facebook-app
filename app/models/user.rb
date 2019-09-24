@@ -6,7 +6,7 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable, :omniauthable, omniauth_providers: [:facebook]
   has_many :posts, foreign_key: :author_id, dependent: :destroy
-  has_many :comments, dependent: :destroy
+  has_many :comments, foreign_key: :commenter_id, dependent: :delete_all
   has_many :likes, dependent: :destroy
   has_many :friendships, dependent: :destroy
   has_many :inverse_friendships, class_name: 'Friendship', foreign_key: 'friend_id', dependent: :destroy

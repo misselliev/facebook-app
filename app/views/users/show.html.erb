@@ -6,8 +6,10 @@
 </div>
 <br>
 <div class="centered aligned">
-  <% @user.posts.recent_posts.each do |post| %>
-    <%= render 'shared/display_post', locals: {object: post, from: 'user', user: @user} %>
+  <% if current_user.friends.include?(@user) %>
+    <% @user.posts.recent_posts.each do |post| %>
+      <%= render 'shared/display_post', locals: {object: post, from: 'user', user: @user} %>
+    <% end %>
   <% end %>
 
   <% content_for :left_side do %>
@@ -67,9 +69,9 @@
           <% @user.friends.each do |friend| %>
             <%= link_to user_path(friend.id), class: "item" do %>
               <% if friend.image.nil? %>
-                <%= image_tag('profile.jpg', class: "ui avatar image") %>
+                <%= image_tag('profile.jpg', class: "ui avatar image", alt: "profile-image") %>
               <% else %>
-                <%= image_tag(friend.image, class: "ui avatar image") %>
+                <%= image_tag(friend.image, class: "ui avatar image", alt: "profile-image") %>
               <% end %>
               <div class="content">
                 <div class="ui header floated right"><%= friend.name %></div>
@@ -141,7 +143,7 @@
         <% end %>
         </div>
       </div>
+    </div>
   <% end %>
-
-  </div>
+</div>
 
