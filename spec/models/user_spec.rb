@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'rails_helper'
 
 RSpec.describe User, type: :model do
@@ -5,7 +7,7 @@ RSpec.describe User, type: :model do
   let(:invalid_user) { FactoryBot.build(:author, :invalid_user) }
 
   describe 'basic validations for user model' do
-    context "validates presences" do
+    context 'validates presences' do
       it { should validate_presence_of(:name) }
       it { should validate_presence_of(:lastname) }
       it { should validate_presence_of(:password) }

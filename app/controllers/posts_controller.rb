@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class PostsController < ApplicationController
   before_action :access_post, only: :edit
   def new
@@ -61,5 +63,4 @@ class PostsController < ApplicationController
   def post_params
     params.require(:post).permit(:content, :author_id)
   end
-
 end

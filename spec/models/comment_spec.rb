@@ -1,8 +1,10 @@
+# frozen_string_literal: true
+
 require 'rails_helper'
 
 RSpec.describe Comment, type: :model do
-  let (:bad_comment) {FactoryBot.build(:comment, :invalid_comment)}
-  let (:good_comment) {FactoryBot.build(:comment, :valid_comment)}
+  let(:bad_comment) { FactoryBot.build(:comment, :invalid_comment) }
+  let(:good_comment) { FactoryBot.build(:comment, :valid_comment) }
 
   describe 'basic validations for comment model' do
     it 'is valid when the length is right, it has an author and a post' do
@@ -30,7 +32,7 @@ RSpec.describe Comment, type: :model do
 
   describe 'validating associations' do
     it 'belongs to user' do
-      should belong_to(:commenter) 
+      should belong_to(:commenter)
     end
 
     it 'belongs to post' do

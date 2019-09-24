@@ -1,8 +1,10 @@
+# frozen_string_literal: true
+
 require 'rails_helper'
 
 RSpec.describe Like, type: :model do
-  let(:good_like){FactoryBot.build(:like, :valid_like)}
-  let(:bad_like){FactoryBot.build(:like, :invalid_like)}
+  let(:good_like) { FactoryBot.build(:like, :valid_like) }
+  let(:bad_like) { FactoryBot.build(:like, :invalid_like) }
 
   describe 'basic validations for like' do
     it 'is not valid without user' do
@@ -10,7 +12,7 @@ RSpec.describe Like, type: :model do
     end
 
     it 'is not valid without post' do
-      should_not allow_value(bad_like.post).for(:post)      
+      should_not allow_value(bad_like.post).for(:post)
     end
 
     it 'is valid when it has a user and a post' do
