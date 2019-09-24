@@ -31,5 +31,4 @@ class LikesController < ApplicationController
       flash[:alert] = 'Something went wrong'
     end
   end
-
 end

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class CommentsController < ApplicationController
   def new
     @comment = Comment.new
@@ -6,10 +8,10 @@ class CommentsController < ApplicationController
   def create
     @comment = Comment.create!(commenter_id: current_user.id, post_id: params[:id], content: params[:comment][:content])
     if @comment.save
-      flash[:notice] = "Comment created."
+      flash[:notice] = 'Comment created.'
       redirect_to post_path(params[:id])
     else
-      flash[:alert] = "Something went wrong."
+      flash[:alert] = 'Something went wrong.'
     end
   end
 end

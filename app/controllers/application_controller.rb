@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class ApplicationController < ActionController::Base
   helper_method :resource_name, :resource, :devise_mapping, :resource_class
   protect_from_forgery with: :exception
@@ -5,7 +7,7 @@ class ApplicationController < ActionController::Base
   def resource_name
     :user
   end
- 
+
   def resource
     @resource ||= User.new
   end
@@ -13,17 +15,12 @@ class ApplicationController < ActionController::Base
   def resource_class
     User
   end
- 
+
   def devise_mapping
     @devise_mapping ||= Devise.mappings[:user]
   end
 
   def authorized?
     !current_user.nil?
-  end
-
-  private
-  def after_sign_in_path_for(resource)
-    "/posts_index"
   end
 end
