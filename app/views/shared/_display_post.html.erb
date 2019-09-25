@@ -9,7 +9,14 @@
         <% end %>
         <div class="content">
           <%= link_to user_path(locals[:object].author) do %>
-            <div class="ui sub header"><%= "#{locals[:object].author.name} #{locals[:object].author.lastname}" %></div>
+            <% if locals[:object].author != locals[:object].friend %>
+              <div class="ui sub header"><%= "#{locals[:object].author.name} #{locals[:object].author.lastname}" %>
+                <i class="angle right icon" style="margin: 0 7px 0 7px"></i>
+                <%= "#{locals[:object].friend.name} #{locals[:object].friend.lastname}" %>
+              </div>
+            <% else %>
+              <div class="ui sub header"><%= "#{locals[:object].author.name} #{locals[:object].author.lastname}" %></div>
+            <% end %>
           <% end %>
           <small style="color: grey"><%= time_ago_in_words(locals[:object].created_at, include_seconds: true).gsub('about', '') %></small>
         </div>
