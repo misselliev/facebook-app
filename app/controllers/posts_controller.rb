@@ -10,8 +10,10 @@ class PostsController < ApplicationController
     @post = current_user.posts.build(post_params)
     @post.update(friend_id: params[:friend_id].to_i)
     if @post.save
-      redirect_to posts_index_path
+      redirecting_data(params[:from], params[:friend_id].to_i) if params[:from] == 'user'
+      redirecting_data(params[:from]) if params[:from] == 'index'
     else
+      flash[:alert] = 'Something went wrong'
       render 'new'
     end
   end
@@ -64,5 +66,10 @@ class PostsController < ApplicationController
 
   def post_params
     params.require(:post).permit(:content, :author_id, :friend_id)
+  end
+
+  def redirecting_data(from, user = nil)
+    redirect_to posts_index_path if from == 'index'
+    redirect_to user_path(user) if from == 'user'
   end
 end
