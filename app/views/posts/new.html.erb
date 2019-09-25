@@ -6,6 +6,6 @@
 </div>
 <br>
 <div class="ui container centered grid">
-  <%= render "shared/postform" %>
+  <%= render "shared/postform", locals: { object: current_user } %>
   <%= render 'shared/columns'%>
 </div>

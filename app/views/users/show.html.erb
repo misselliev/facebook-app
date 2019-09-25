@@ -4,6 +4,9 @@
     <i class="ui user outline icon"></i>
   </h2>
 </div>
+<div class="ui container centered grid">
+  <%= render "shared/postform", locals: { object: @user } %>
+</div>
 <br>
 <div class="centered aligned">
   <% if current_user.friends.include?(@user) || current_user == @user %>

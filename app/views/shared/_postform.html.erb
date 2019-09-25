@@ -1,11 +1,12 @@
-<%= form_for(@post, :html => {:class => "ui form ten wide column"}) do |f| %>
+<%= form_for(@post, from: locals[:from], object: locals[:object], :html => {:class => "ui form ten wide column"}) do |f| %>
   <%= render "devise/shared/error_messages", resource: @post %>
+  <%= hidden_field_tag 'friend_id', locals[:object].id %>
   <div class="field">
     <%= f.text_area :content, placeholder: "Write your post here..." %>
   </div>
   <br>
   <div class="ui centered grid actions">
-    <%= f.submit "Post", class: 'medium ui teal basic button' %>
+    <%= f.submit "Post", class: 'medium ui teal basic button'%>
   </div>
   <br>
 <% end %>

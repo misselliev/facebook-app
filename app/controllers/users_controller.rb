@@ -14,6 +14,7 @@ class UsersController < ApplicationController
   end
 
   def show
+    @post = Post.new
     @user = User.find_by_id(params[:id])
     @is_pending = current_user.friendships.is_a_pending(@user).exists?
     @is_incoming = @user.friendships.is_a_pending(current_user).exists?

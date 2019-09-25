@@ -8,6 +8,7 @@ class PostsController < ApplicationController
 
   def create
     @post = current_user.posts.build(post_params)
+    @post.update(friend_id: params[:friend_id].to_i)
     if @post.save
       redirect_to posts_index_path
     else
@@ -61,6 +62,6 @@ class PostsController < ApplicationController
   end
 
   def post_params
-    params.require(:post).permit(:content, :author_id)
+    params.require(:post).permit(:content, :author_id, :friend_id)
   end
 end
