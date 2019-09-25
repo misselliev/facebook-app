@@ -6,7 +6,7 @@
 </div>
 <br>
 <div class="centered aligned">
-  <% if current_user.friends.include?(@user) %>
+  <% if current_user.friends.include?(@user) || current_user == @user %>
     <% @user.posts.recent_posts.each do |post| %>
       <%= render 'shared/display_post', locals: {object: post, from: 'user', user: @user} %>
     <% end %>

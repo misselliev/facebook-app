@@ -21,7 +21,7 @@ class PostsController < ApplicationController
 
   def show
     @post = Post.find(params[:id])
-    if current_user.friends.include? @post.author
+    if current_user.friends.include?(@post.author) || current_user == @post.author
       @comment = Comment.new
       @index_comments = @post.comments.all.recent_comments
     else
