@@ -18,6 +18,7 @@ class PostsController < ApplicationController
 
   def index
     @posts = current_user.news_feed
+    @post = Post.new
   end
 
   def show
