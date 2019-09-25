@@ -5,9 +5,7 @@
   </h2>
 </div>
 <br>
-<div class="ui container centered grid">
-  <%= render "shared/postform", locals: { object: current_user } %>
-</div>
+<%= render "shared/postform", locals: { object: current_user } %>
 <br>
 <div class="centered aligned">
   <% @posts.each do |post| %>

@@ -6,9 +6,8 @@
 </div>
 <div class="centered aligned">
   <% if current_user.friends.include?(@user) || current_user == @user %>
-    <div class="ui container centered grid">
+
       <%= render "shared/postform", locals: { object: @user } %>
-    </div>
     <% Post.mine_and_friends(@user).each do |post| %>
       <%= render 'shared/display_post', locals: {object: post, from: 'user', user: @user} %>
     <% end %>
