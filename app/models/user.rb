@@ -33,7 +33,10 @@ class User < ApplicationRecord
   end
 
   def news_feed
-    Post.where(author: friends + [self]).recent_posts
+    a = Post.where(author: friends + [self]).mine_and_friends(self)
+    b = Post.where(author: friends + [self]).recent_posts
+    c = a + b
+    c.uniq!
   end
 
   def self.new_with_session(params, session)
