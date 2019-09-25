@@ -5,7 +5,7 @@
   </h2>
 </div>
 <br>
-<%= render "shared/postform", locals: { object: current_user } %>
+<%= render "shared/postform", locals: { object: current_user, from: 'index' } %>
 <br>
 <div class="centered aligned">
   <% @posts.each do |post| %>

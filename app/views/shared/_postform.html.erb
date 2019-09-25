@@ -2,7 +2,14 @@
 <%= form_for(@post, from: locals[:from], object: locals[:object], html: { class: "ui form" }) do |f| %>
   <%= render "devise/shared/error_messages", resource: @post %>
   <%= hidden_field_tag 'friend_id', locals[:object].id %>
+  <% if locals[:from] == 'index' %>
     <%= f.text_area :content, placeholder: "Write your post here...", style: "height: 30px" %>
+  <% elsif locals[:from] == 'user' && locals[:object] != current_user %>
+    <%= f.text_area :content, placeholder: "Write a post to #{locals[:object].name}", style: "height: 30px" %>
+  <% else %>
+    <%= f.text_area :content, placeholder: "Write your post here...", style: "height: 30px" %>
+  <% end %>
+
   <br>
     <%= f.submit "Post", class: 'medium ui teal basic fluid button'%>
   <br>
