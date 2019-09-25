@@ -27,7 +27,7 @@
     </div>
     <div class="ui segment">
       <div class="content">
-        <%= @post.content %>
+        <%= simple_format(@post.content) %>
         <% if post_owner?(@post) %>
           <%= link_to edit_post_path(@post) do %>
             <div class="ui bottom right attached mini label">EDIT</div>
