@@ -14,12 +14,24 @@ emails = %w[eli@woof.com santiago@woof.com dulce@woof.com lulu@woof.com stanley@
                       updated_at: date_time)
 
   # Creating posts
-  5.times do
+  3.times do
     date_time = Faker::Time.between_dates(from: 3.months.ago - 1, to: Date.today, period: :all)
     user.posts.build(
       content: Faker::Hacker.say_something_smart,
+      friend_id: user,
       created_at: date_time,
       updated_at: date_time
+    ).save
+  end
+
+  2.times do
+    friend = Array(0..4).sample
+    date_time = Faker::Time.between_dates(from: 3.months.ago - 1, to: Date.today, period: :all)
+    user.posts.build(
+        content: Faker::Hacker.say_something_smart,
+        friend_id: friend,
+        created_at: date_time,
+        updated_at: date_time
     ).save
   end
 end
