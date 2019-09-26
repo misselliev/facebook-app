@@ -1,0 +1,54 @@
+<div class="ui raised segments">
+  <div class="ui segment">
+    <div class="ui horizontal list">
+      <div class="item">
+        <% if locals[:object].author.image.nil? %>
+          <%= image_tag('profile.jpg', class: "ui avatar image", alt: "profile-image") %>
+        <% else %>
+          <%= image_tag(locals[:object].author.image, class: "ui avatar image", alt: "profile-image") %>
+        <% end %>
+        <div class="content">
+          <%= link_to user_path(locals[:object].author) do %>
+            <% if locals[:object].author != locals[:object].friend %>
+              <div class="ui sub header"><%= "#{locals[:object].author.name} #{locals[:object].author.lastname}" %>
+                <i class="angle right icon" style="margin: 0 7px 0 7px"></i>
+                <%= "#{locals[:object].friend.name} #{locals[:object].friend.lastname}" %>
+              </div>
+            <% else %>
+              <div class="ui sub header"><%= "#{locals[:object].author.name} #{locals[:object].author.lastname}" %></div>
+            <% end %>
+          <% end %>
+          <small style="color: grey"><%= time_ago_in_words(locals[:object].created_at, include_seconds: true).gsub('about', '') %></small>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="ui segment">
+    <div class="content">
+      <%= simple_format(locals[:object].content) %>
+    </div>
+  </div>
+  <div class="ui segment card">
+    <div class="content">
+      <span class="left floated">
+        <% if locals[:from] == 'user' %>
+          <%= render 'shared/check_likes', locals: {post: locals[:object], from: locals[:from], user: locals[:user]} %>
+        <% else %>
+          <%= render 'shared/check_likes', locals: {post: locals[:object], from: locals[:from]} %>
+        <% end %>
+
+        <small class="meta"> <%= "  #{locals[:object].likes.count} likes" %></small>
+      </span>
+      <span class="right floated">
+        <i class="comment teal outline icon"></i>
+        <small class="meta right floated"><%= locals[:object].comments.count %> comments</small>
+      </span>
+    </div>
+    <%= link_to post_path(locals[:object]) do %>
+      <div class="ui bottom attached button">
+        <i class="envelope outline icon"></i>
+        Open
+      </div>
+    <% end %>
+  </div>
+</div>

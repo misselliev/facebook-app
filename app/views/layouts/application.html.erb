@@ -29,16 +29,17 @@
 </div>
 <br/>
 <div class="ui container"><%= yield(:landing) %></div>
-<div class="ui grid">
-  <div class="four wide column">
-
-    <%= yield(:left_side) %>
-  </div>
-  <div class="eight wide column">
-    <%= yield %>
-  </div>
-  <div class="four wide column">
-    <%= yield(:right_side) %>
+<div class="ui centered container"> 
+  <div class="ui grid">
+    <div class="four wide column">
+      <%= yield(:left_side) %>
+    </div>
+    <div class="eight wide column">
+      <%= yield %>
+    </div>
+    <div class="four wide column">
+      <%= yield(:right_side) %>
+    </div>
   </div>
 </div>
 </body>

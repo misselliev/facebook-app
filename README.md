@@ -4,6 +4,8 @@ Building a functional clone of Facebook.
 
 Built with Rails 5.2. Powered by teal coffee.
 
+You can look at it live [here](https://fkbook.herokuapp.com/)
+
 ## Developers Team
 
 - [Santiago Torres](https://github.com/stiakov)

@@ -1,9 +1,10 @@
+# frozen_string_literal: true
+
 FactoryBot.define do
   factory :post do
-
     trait :valid_post do
       id { 1 }
-      content { "This is my new post" }
+      content { 'This is my new post' }
       association :author, :valid_user
     end
 

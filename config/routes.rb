@@ -1,9 +1,13 @@
 Rails.application.routes.draw do
-  root 'pages#home'
+  authenticated :user do
+    root :to => 'posts#index', as: :authenticated_root
+  end
+  root :to => 'pages#home'
+  get 'friendships/create'
 
-  devise_for :users, :controllers => { registrations: 'registrations' }
+  devise_for :users, :controllers => { registrations: 'registrations', :omniauth_callbacks => "users/omniauth_callbacks" }
   
-  resources :users, only: %i[new create index]
+  resources :users, only: %i[new create index show]
   get 'users_index', to: 'users#index'
   
   resources :posts, only: %i[new create index show edit update]
@@ -15,4 +19,6 @@ Rails.application.routes.draw do
   get 'comments/new'
   match '/comments/create/:id', to: 'comments#create', via: :post, as: :create_comment
 
+  resources :friendships, only: %i[create destroy]
+  match '/friendships/update_status/:id', to: 'friendships#update_status', via: :post, as: :update_status
 end

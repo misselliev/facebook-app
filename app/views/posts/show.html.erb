@@ -11,9 +11,15 @@
     <div class="ui segment">
       <div class="ui horizontal list">
         <div class="item">
-          <%= image_tag('profile.jpg', class: "ui avatar image") %>
+          <% if @post.author.image.nil? %>
+            <%= image_tag('profile.jpg', class: "ui avatar image", alt: "profile-image") %>
+          <% else %>
+            <%= image_tag(@post.author.image, class: "ui avatar image", alt: "profile-image") %>
+          <% end %>
           <div class="content">
-            <div class="ui sub header"><%= "#{@post.author.name} #{@post.author.lastname}" %></div>
+            <%= link_to user_path(@post.author.id) do %>
+              <div class="ui sub header"><%= "#{@post.author.name} #{@post.author.lastname}" %></div>
+            <% end %>
             <small style="color: grey"><%= time_ago_in_words(@post.created_at, include_seconds: true).gsub('about', '') %></small>
           </div>
         </div>
@@ -21,7 +27,7 @@
     </div>
     <div class="ui segment">
       <div class="content">
-        <%= @post.content %>
+        <%= simple_format(@post.content) %>
         <% if post_owner?(@post) %>
           <%= link_to edit_post_path(@post) do %>
             <div class="ui bottom right attached mini label">EDIT</div>
@@ -32,7 +38,7 @@
     <div class="ui segment card">
       <div class="content">
         <span class="left floated">
-          <%= render 'shared/check_likes', locals: { post: @post , from: 'show'} %>
+          <%= render 'shared/check_likes', locals: {post: @post, from: 'show'} %>
 
           <small class="meta"> <%= "  #{@post.likes.count} likes" %></small>
         </span>
@@ -58,9 +64,15 @@
               <div class="four wide column">
                 <div class="ui horizontal list">
                   <div class="item">
-                    <%= image_tag('profile.jpg', class: "ui avatar image") %>
+                    <% if comm.commenter.image.nil? %>
+                      <%= image_tag('profile.jpg', class: "ui avatar image", alt: "profile-image") %>
+                    <% else %>
+                      <%= image_tag(comm.commenter.image, class: "ui avatar image", alt: "profile-image") %>
+                    <% end %>
                     <div class="content">
-                      <div class="ui sub header"><%= "#{comm.commenter.name} #{comm.commenter.lastname}" %></div>
+                      <%= link_to user_path(comm.commenter.id) do %>
+                        <div class="ui sub header"><%= "#{comm.commenter.name} #{comm.commenter.lastname}" %></div>
+                      <% end %>
                       <small style="color: grey"><%= time_ago_in_words(comm.created_at, include_seconds: true).gsub('about', '') %></small>
                     </div>
                   </div>

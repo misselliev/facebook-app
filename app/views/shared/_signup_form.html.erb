@@ -36,3 +36,12 @@
     </div>
   <% end %>
 </div>
+<div class="ui horizontal divider">OR</div>
+<br>
+<% unless current_user %>
+  <%= link_to user_facebook_omniauth_authorize_path do %>
+    <div class="ui blue basic button container centered">
+      <i class="facebook icon"></i> Continue with Facebook
+    </div>
+  <% end %>
+<% end %>

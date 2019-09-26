@@ -7,7 +7,6 @@ RSpec.describe Post, type: :model do
   let(:no_post) { FactoryBot.build(:post, :invalid_post) }
 
   describe 'basic validations for post model' do
-
     it 'is not valid without content' do
       should_not allow_value(no_post.content).for(:content)
     end
@@ -28,7 +27,6 @@ RSpec.describe Post, type: :model do
   end
 
   describe 'validating correct associations' do
-
     it 'belongs to User' do
       should belong_to(:author)
     end
