@@ -24,7 +24,7 @@ cd into Facebook-app folder
 ```
 $ cd facebook-app
 $ bundle install
-$ rails db:create db:migrate
+$ rails db:create
 $ rails db:migrate
 $ rails db:seed
 $ rails server
