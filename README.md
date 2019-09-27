@@ -8,7 +8,6 @@ Building a functional clone of Facebook.
 
 Built with Rails 5.2. Powered by teal coffee.
 
-![](header.png)
 
 ## Usage
 
