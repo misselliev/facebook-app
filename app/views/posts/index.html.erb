@@ -15,4 +15,7 @@
   <br>
   <%= render 'shared/columns' %>
   <br>
+  <% content_for :right_side do %>
+    <%= render 'shared/notif_bar'%>
+  <% end %>
 </div>
