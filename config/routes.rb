@@ -13,6 +13,8 @@ Rails.application.routes.draw do
   resources :posts, only: %i[new create index show edit update]
   get 'posts_index', to: 'posts#index'
   match '/posts/create', to: 'posts#create', via: :post, as: :create_post
+  delete '/posts/destroy/:id', to: 'posts#destroy', as: :destroy_post
+
   match '/likes/create/:id', to: 'likes#create', via: :post, as: :create_like
   delete '/likes/destroy/:id', to: 'likes#destroy', as: :destroy_like
 

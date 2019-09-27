@@ -3,6 +3,34 @@
   Edit your post
 </h2>
 <br>
-<div class="ui container centered grid">
-  <%= render "shared/postform" %>
+<div class="ui centered aligned">
+  <div class="ui segments">
+    <div class="ui segment">
+      <div class="ui horizontal list">
+        <div class="item">
+
+          <% if @post.author.image.nil? %>
+            <%= image_tag('profile.jpg', class: "ui avatar image", alt: "profile-image") %>
+          <% else %>
+            <%= image_tag(@post.author.image, class: "ui avatar image", alt: "profile-image") %>
+          <% end %>
+          <div class="content">
+            <%= link_to user_path(@post.author) do %>
+              <% if @post.author != @post.friend %>
+                <div class="ui sub header"><%= "#{@post.author.name} #{@post.author.lastname}" %>
+                  <i class="angle right icon" style="margin: 0 7px 0 7px"></i>
+                  <%= "#{@post.friend.name} #{@post.friend.lastname}" %>
+                </div>
+              <% else %>
+                <div class="ui sub header"><%= "#{@post.author.name} #{@post.author.lastname}" %></div>
+              <% end %>
+            <% end %>
+            <small style="color: grey"><%= time_ago_in_words(@post.created_at, include_seconds: true).gsub('about', '') %></small>
+          </div>
+        </div>
+
+      </div>
+      <%= render "shared/postform", locals: {object: @post} %>
+    </div>
+  </div>
 </div>

@@ -7,8 +7,8 @@ class Post < ApplicationRecord
   belongs_to :friend, class_name: 'User'
   validates :friend, presence: true
 
-  has_many :comments
-  has_many :likes
+  has_many :comments, dependent: :destroy
+  has_many :likes, dependent: :destroy
 
   validates :content, presence: true, length: { minimum: 1, maximum: 500 }
   scope :recent_posts, -> { where('created_at < ?', Time.current).order(created_at: :DESC) }

@@ -21,6 +21,7 @@ class PostsController < ApplicationController
   def index
     @posts = current_user.news_feed
     @post = Post.new
+    @pending_requests = current_user.inverted_pending
   end
 
   def show
@@ -46,6 +47,16 @@ class PostsController < ApplicationController
     else
       render 'edit'
     end
+  end
+
+  def destroy
+    @post = Post.find(params[:id])
+    if @post.destroy
+      flash[:notice] = 'Post deleted'
+    else
+      flash[:alert] = 'Post cannot be deleted'
+    end
+    redirect_to posts_index_path
   end
 
   private
