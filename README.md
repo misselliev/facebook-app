@@ -1,12 +1,8 @@
 # Facebook App
 
-[![NPM Version][npm-image]][npm-url]
-[![Build Status][travis-image]][travis-url]
-[![Downloads Stats][npm-downloads]][npm-url]
-
 Building a functional clone of Facebook.
 
-Built with Rails 5.2. Powered by teal coffee.
+Built with Rails 5.2. Powered by black coffee.
 
 
 ## Usage
