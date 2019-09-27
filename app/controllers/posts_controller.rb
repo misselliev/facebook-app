@@ -48,6 +48,16 @@ class PostsController < ApplicationController
     end
   end
 
+  def destroy
+    @post = Post.find(params[:id])
+    if @post.destroy
+      flash[:notice] = 'Post deleted'
+    else
+      flash[:alert] = 'Post cannot be deleted'
+    end
+    redirect_to posts_index_path
+  end
+
   private
 
   def access_post
