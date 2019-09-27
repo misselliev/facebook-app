@@ -1,0 +1,60 @@
+<div class="ui card">
+  <div class="content">
+    <%= link_to user_path(current_user) do %>
+      <h3 class="ui header" style="
+      margin-top: 0px">
+        <i class="bell outline icon floated right"></i>
+        <div class="content">Welcome <%= current_user.name %>!</div>
+      </h3>
+    <% end %>
+    <br>
+    <div class="comments">
+      <i class="comment icon"></i>
+      <strong>Recents comments on your posts:</strong>
+      <br>
+      <br>
+      <% if current_user.posts.empty? %>
+        <div class="ui center aligned">No recent comments</div>
+      <% else %>
+        <% current_user.posts.last_five_posts.each do |post| %>
+          <% unless post.comments.size.zero? %>
+            <%= link_to post_path(post) do %>
+              <div><%= post.comments.last.content %></div>
+              <div class="ui fitted divider"></div>
+            <% end %>
+          <% end %>
+        <% end %>
+      <% end %>
+    </div>
+    <br>
+    <% unless @pending_requests.empty? %>
+      <div class="friend_requests">
+        <i class="user icon"></i>
+        <strong>Friends requests: </strong><%= @pending_requests.count %>
+        <br>
+        <br>
+        <% @pending_requests.each do |friend_req| %>
+          <div class="ui equal width form">
+            <div class="ui equal width form">
+              <div class="fields">
+                <div class="field"><%= friend_req.user.name %> <%= friend_req.user.lastname %></div>
+                <div class="field">
+                  <button class="mini positive ui button field" id="accept_friendship">
+                    <%= link_to 'Accept', update_status_path(friend_request: friend_req), method: :post %>
+                  </button>
+                </div>
+                <div class="field">
+                  <button class="mini negative ui button field" id="decline_friendship">
+                    <%= link_to 'Decline', friendship_path(id: friend_req, friend_id: friend_req.user), method: :delete %>
+                  </button>
+                </div>
+              </div>
+            </div>
+            <div class="ui fitted divider"></div>
+            <br>
+        <% end %>
+        </div>
+    <% end %>
+    </div>
+  </div>
+</div>

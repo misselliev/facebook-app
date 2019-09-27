@@ -12,6 +12,7 @@ class UsersController < ApplicationController
   def index
     @users = User.all
     @post = Post.new
+    @pending_requests = current_user.inverted_pending
   end
 
   def show

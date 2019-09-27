@@ -21,6 +21,7 @@ class PostsController < ApplicationController
   def index
     @posts = current_user.news_feed
     @post = Post.new
+    @pending_requests = current_user.inverted_pending
   end
 
   def show
