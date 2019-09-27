@@ -1,10 +1,20 @@
 <div class="ui centered grid">
   <div class="ui secondary vertical text menu">
-    <a class="item">
-      <%= link_to 'Post index', posts_index_path %>
-    </a>
-    <a class="item">
-      <%= link_to 'Users index', users_index_path %>
-    </a>
+    <div class="item">
+      <%= link_to posts_index_path do %>
+        <button class="ui basic teal button">
+          <i class="home icon"></i>
+          Home
+        </button>
+      <% end %>
+    </div>
+    <div class="item">
+      <%= link_to users_index_path do %>
+        <button class="ui basic teal button">
+          <i class="users icon"></i>
+          Users
+        </button>
+      <% end %>
+    </div>
   </div>
 </div>
